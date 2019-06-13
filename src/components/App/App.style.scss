@@ -1,0 +1,17 @@
+.App {
+	&__adjusters {
+		&__adjustment {
+
+		}
+	}
+
+	&__layers {
+		position: relative;
+
+		&__layer {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	}
+}
