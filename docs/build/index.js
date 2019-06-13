@@ -25506,10 +25506,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const layerInitiators = Object.freeze([
-    { name: "Tank", url: "/assets/images/tank.png" },
-    { name: "Frame", url: "/assets/images/frame.png" },
-    { name: "Fender", url: "/assets/images/fender.png" },
-    { name: "Background", url: "/assets/images/background.png", static: true },
+    { name: "Tank", url: "assets/images/tank.png" },
+    { name: "Frame", url: "assets/images/frame.png" },
+    { name: "Fender", url: "assets/images/fender.png" },
+    { name: "Background", url: "assets/images/background.png", static: true },
 ]);
 class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     constructor(props) {

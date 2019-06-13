@@ -28,10 +28,10 @@ export interface AppState {
 }
 
 const layerInitiators: LayerInitiator[] = Object.freeze([
-	{ name: "Tank", url: "/assets/images/tank.png" },
-	{ name: "Frame", url: "/assets/images/frame.png" },
-	{ name: "Fender", url: "/assets/images/fender.png" },
-	{ name: "Background", url: "/assets/images/background.png", static: true },
+	{ name: "Tank", url: "assets/images/tank.png" },
+	{ name: "Frame", url: "assets/images/frame.png" },
+	{ name: "Fender", url: "assets/images/fender.png" },
+	{ name: "Background", url: "assets/images/background.png", static: true },
 ]) as LayerInitiator[];
 
 export default class App extends React.PureComponent<AppProps, AppState> {
