@@ -25581,6 +25581,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         })))
             .then(() => {
             location.search.slice(1).split("&")
+                .filter(item => !!item)
                 .forEach(item => {
                 const [name, color] = item.split("=");
                 const [h, s, l] = color.split(",");

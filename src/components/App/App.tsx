@@ -68,6 +68,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 		))
 			.then(() => {
 				location.search.slice(1).split("&")
+					.filter(item => !!item)
 					.forEach(item => {
 						const [name, color] = item.split("=");
 						const [h, s, l] = color.split(",");
