@@ -17,7 +17,7 @@ module.exports = {
 		index: "./src/index.tsx",
 	},
 	output: {
-		path: path.resolve(__dirname, "gh-pages/build"),
+		path: path.resolve(__dirname, "docs/build"),
 		filename: "[name].js",
 	},
 	module: {
