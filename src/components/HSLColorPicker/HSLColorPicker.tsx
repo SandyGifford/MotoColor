@@ -2,7 +2,6 @@ import "./HSLColorPicker.style";
 
 import * as React from "react";
 import { HSLColor } from "@typings/color";
-import NumberUtils from "@utils/NumberUtils";
 import ColorSlider, { ColorSliderChangeHandler } from "@components/ColorSlider/ColorSlider";
 
 export type HSLColorPickerChangeHandler = (color: HSLColor) => void;
