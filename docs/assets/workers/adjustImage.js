@@ -20,7 +20,7 @@ onmessage = e => {
 				type: "pixelsAdjusted",
 				data: basePixels.map(pixel => ({
 					h: adjustment.h,
-					s: NumberUtils.clamp(pixel.s * adjustment.s, 0, 1),
+					s: Math.max(0, Math.min(1, pixel.s * adjustment.s)),
 					l: pixel.l * adjustment.l * 2,
 					a: pixel.a,
 				}))

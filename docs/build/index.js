@@ -25883,9 +25883,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils/ColorUtils */ "./src/utils/ColorUtils.ts");
-/* harmony import */ var _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/NumberUtils */ "./src/utils/NumberUtils.ts");
-/* harmony import */ var _workers_ImageAdjuster__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @workers/ImageAdjuster */ "./src/workers/ImageAdjuster.ts");
-
+/* harmony import */ var _workers_ImageAdjuster__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @workers/ImageAdjuster */ "./src/workers/ImageAdjuster.ts");
 
 
 
@@ -25894,10 +25892,34 @@ class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     constructor(props) {
         super(props);
         this.cvsRef = react__WEBPACK_IMPORTED_MODULE_1__["createRef"]();
-        this.imageAdjuster = new _workers_ImageAdjuster__WEBPACK_IMPORTED_MODULE_4__["ImageAdjuster"]();
-        this.state = {};
+        this.imageAdjuster = new _workers_ImageAdjuster__WEBPACK_IMPORTED_MODULE_3__["ImageAdjuster"]();
+        this.updateCanvas = () => {
+            const { pixels, width, height, adjustment, adjust } = this.props;
+            const { workerReady } = this.state;
+            if (!pixels.length || !adjust || !workerReady)
+                return;
+            this.imageAdjuster.adjustImage(adjustment)
+                .then(adjustedPixels => {
+                const imageData = this.ctx.getImageData(0, 0, width, height);
+                const { data } = imageData;
+                for (let i = 0; i < adjustedPixels.length; i++) {
+                    const pixel = _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__["default"].hslToRGB(adjustedPixels[i]);
+                    const pixelIndex = i * 4;
+                    data[pixelIndex] = pixel.r;
+                    data[pixelIndex + 1] = pixel.g;
+                    data[pixelIndex + 2] = pixel.b;
+                    data[pixelIndex + 3] = typeof pixel.a === "number" ? pixel.a : 255;
+                }
+                this.ctx.putImageData(imageData, 0, 0);
+            });
+        };
+        this.state = {
+            workerReady: false,
+        };
         this.imageAdjuster.setBasePixels(props.pixels)
-            .then(() => console.log("done"));
+            .then(() => this.setState({
+            workerReady: true,
+        }, this.updateCanvas));
     }
     render() {
         return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("canvas", { className: "HSLImage", width: this.props.width, height: this.props.height, ref: this.cvsRef }));
@@ -25912,35 +25934,6 @@ class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
             this.props.adjustment.l !== prevProps.adjustment.l ||
             (this.props.adjust && !prevProps.adjust))
             this.updateCanvas();
-    }
-    updateCanvas() {
-        const { pixels, width, height } = this.props;
-        if (!pixels.length)
-            return;
-        const imageData = this.ctx.getImageData(0, 0, width, height);
-        const { data } = imageData;
-        const adjustedPixels = this.getAdjustedPixels();
-        for (let i = 0; i < adjustedPixels.length; i++) {
-            const pixel = _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__["default"].hslToRGB(adjustedPixels[i]);
-            const pixelIndex = i * 4;
-            data[pixelIndex] = pixel.r;
-            data[pixelIndex + 1] = pixel.g;
-            data[pixelIndex + 2] = pixel.b;
-            data[pixelIndex + 3] = typeof pixel.a === "number" ? pixel.a : 255;
-        }
-        this.ctx.putImageData(imageData, 0, 0);
-    }
-    getAdjustedPixels() {
-        const { adjustment, pixels, adjust } = this.props;
-        if (!adjust)
-            return pixels;
-        const adjusted = pixels.map(pixel => ({
-            h: adjustment.h,
-            s: _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__["default"].clamp(pixel.s * adjustment.s, 0, 1),
-            l: pixel.l * adjustment.l * 2,
-            a: pixel.a,
-        }));
-        return adjusted;
     }
 }
 
@@ -26194,7 +26187,8 @@ class ImageAdjuster {
                     resolver.res(message.data);
                     break;
                 default:
-                    throw `ImageAdjuster got unknown message type "${message.type}"`;
+                    resolver.rej(`ImageAdjuster got unknown message type "${message.type}"`);
+                    break;
             }
         };
         this.worker.addEventListener("message", this.messageReceived);
@@ -26204,7 +26198,7 @@ class ImageAdjuster {
     setBasePixels(basePixels) {
         const id = this.id++;
         const message = {
-            id: id,
+            id,
             type: "setBasePixels",
             data: basePixels,
         };
@@ -26216,7 +26210,7 @@ class ImageAdjuster {
     adjustImage(adjustment) {
         const id = this.id++;
         const message = {
-            id: id,
+            id,
             type: "adjustImage",
             data: adjustment,
         };

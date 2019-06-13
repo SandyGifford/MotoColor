@@ -3,7 +3,6 @@ import "./HSLImage.style";
 import * as React from "react";
 import { HSLColor } from "@typings/color";
 import ColorUtils from "@utils/ColorUtils";
-import NumberUtils from "@utils/NumberUtils";
 import { ImageAdjuster } from "@workers/ImageAdjuster";
 
 export interface HSLImageProps {
@@ -13,7 +12,9 @@ export interface HSLImageProps {
 	width: number;
 	height: number;
 }
-export interface HSLImageState { }
+export interface HSLImageState {
+	workerReady: boolean;
+}
 
 export default class HSLImage extends React.PureComponent<HSLImageProps, HSLImageState> {
 	private cvsRef: React.RefObject<HTMLCanvasElement> = React.createRef();
@@ -22,10 +23,17 @@ export default class HSLImage extends React.PureComponent<HSLImageProps, HSLImag
 
 	constructor(props: HSLImageProps) {
 		super(props);
-		this.state = {};
+		this.state = {
+			workerReady: false,
+		};
 
 		this.imageAdjuster.setBasePixels(props.pixels)
-			.then(() => console.log("done"))
+			.then(() => this.setState(
+				{
+					workerReady: true,
+				},
+				this.updateCanvas
+			));
 	}
 
 	public render(): React.ReactNode {
@@ -54,41 +62,28 @@ export default class HSLImage extends React.PureComponent<HSLImageProps, HSLImag
 			this.updateCanvas();
 	}
 
-	private updateCanvas() {
-		const { pixels, width, height } = this.props;
+	private updateCanvas = () => {
+		const { pixels, width, height, adjustment, adjust } = this.props;
+		const { workerReady } = this.state;
 
-		if (!pixels.length) return;
+		if (!pixels.length || !adjust || !workerReady) return;
 
-		const imageData = this.ctx.getImageData(0, 0, width, height);
-		const { data } = imageData;
+		this.imageAdjuster.adjustImage(adjustment)
+			.then(adjustedPixels => {
+				const imageData = this.ctx.getImageData(0, 0, width, height);
+				const { data } = imageData;
 
-		const adjustedPixels = this.getAdjustedPixels();
+				for (let i = 0; i < adjustedPixels.length; i++) {
+					const pixel = ColorUtils.hslToRGB(adjustedPixels[i]);
+					const pixelIndex = i * 4;
 
-		for (let i = 0; i < adjustedPixels.length; i++) {
-			const pixel = ColorUtils.hslToRGB(adjustedPixels[i]);
-			const pixelIndex = i * 4;
+					data[pixelIndex] = pixel.r;
+					data[pixelIndex + 1] = pixel.g;
+					data[pixelIndex + 2] = pixel.b;
+					data[pixelIndex + 3] = typeof pixel.a === "number" ? pixel.a : 255;
+				}
 
-			data[pixelIndex] = pixel.r;
-			data[pixelIndex + 1] = pixel.g;
-			data[pixelIndex + 2] = pixel.b;
-			data[pixelIndex + 3] = typeof pixel.a === "number" ? pixel.a : 255;
-		}
-
-		this.ctx.putImageData(imageData, 0, 0);
-	}
-
-	private getAdjustedPixels(): HSLColor[] {
-		const { adjustment, pixels, adjust } = this.props;
-
-		if (!adjust) return pixels;
-
-		const adjusted = pixels.map(pixel => ({
-			h: adjustment.h,
-			s: NumberUtils.clamp(pixel.s * adjustment.s, 0, 1),
-			l: pixel.l * adjustment.l * 2,
-			a: pixel.a,
-		}));
-
-		return adjusted;
+				this.ctx.putImageData(imageData, 0, 0);
+			});
 	}
 }

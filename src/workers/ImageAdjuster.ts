@@ -50,7 +50,7 @@ export class ImageAdjuster {
 		const id = this.id++;
 
 		const message: SetBasePixelsMessage = {
-			id: id,
+			id,
 			type: "setBasePixels",
 			data: basePixels,
 
@@ -67,7 +67,7 @@ export class ImageAdjuster {
 		const id = this.id++;
 
 		const message: AdjustImageMessage = {
-			id: id,
+			id,
 			type: "adjustImage",
 			data: adjustment,
 
@@ -94,7 +94,8 @@ export class ImageAdjuster {
 				resolver.res(message.data);
 				break;
 			default:
-				throw `ImageAdjuster got unknown message type "${(message as any).type}"`
+				resolver.rej(`ImageAdjuster got unknown message type "${(message as any).type}"`);
+				break;
 		}
 	};
 }
