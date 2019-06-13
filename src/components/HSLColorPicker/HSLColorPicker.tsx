@@ -33,7 +33,7 @@ export default class HSLColorPicker extends React.PureComponent<HSLColorPickerPr
 					value={color.s}
 					color={{ h: color.h, s: color.s, l: 0.5, a: 1 }}
 					onChange={this.changeS}
-					backdrop={[{ h: 0, s: 0, l: 0.5, a: 1 }, { h: 1, s: 1, l: 0.5, a: 1 }]} />
+					backdrop={[{ h: color.h, s: 0, l: 0.5, a: 1 }, { h: color.h, s: 1, l: 0.5, a: 1 }]} />
 				<ColorSlider
 					value={color.l}
 					color={{ h: 0, s: 0, l: color.l, a: 1 }}

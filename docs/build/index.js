@@ -25785,7 +25785,7 @@ class HSLColorPicker extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"]
         const { color } = this.props;
         return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "HSLColorPicker" },
             react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ColorSlider_ColorSlider__WEBPACK_IMPORTED_MODULE_2__["default"], { value: color.h, color: { h: color.h, s: 1, l: 0.5, a: 1 }, onChange: this.changeH, backdrop: this.getHSLRainbow() }),
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ColorSlider_ColorSlider__WEBPACK_IMPORTED_MODULE_2__["default"], { value: color.s, color: { h: color.h, s: color.s, l: 0.5, a: 1 }, onChange: this.changeS, backdrop: [{ h: 0, s: 0, l: 0.5, a: 1 }, { h: 1, s: 1, l: 0.5, a: 1 }] }),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ColorSlider_ColorSlider__WEBPACK_IMPORTED_MODULE_2__["default"], { value: color.s, color: { h: color.h, s: color.s, l: 0.5, a: 1 }, onChange: this.changeS, backdrop: [{ h: color.h, s: 0, l: 0.5, a: 1 }, { h: color.h, s: 1, l: 0.5, a: 1 }] }),
             react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ColorSlider_ColorSlider__WEBPACK_IMPORTED_MODULE_2__["default"], { value: color.l, color: { h: 0, s: 0, l: color.l, a: 1 }, onChange: this.changeL, backdrop: [{ h: 0, s: 0, l: 0, a: 1 }, { h: 0, s: 0, l: 1, a: 1 }] })));
     }
     getHSLRainbow() {
