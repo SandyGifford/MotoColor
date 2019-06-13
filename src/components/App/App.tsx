@@ -109,7 +109,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 							return <div key={url} className="App__layers__layer">
 								{
 									layerInitiator.static ?
-										<img src={layerInitiator.url} /> :
+										<img className="App__layers__layer__static" src={layerInitiator.url} /> :
 										<HSLImage
 											pixels={layer.pixels}
 											adjustment={layer.adjustment}

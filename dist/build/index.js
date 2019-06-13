@@ -95,7 +95,7 @@
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".App__layers {\n  position: relative; }\n  .App__layers__layer {\n    position: absolute;\n    top: 0;\n    left: 0; }\n", ""]);
+exports.push([module.i, ".App {\n  font-family: sans-serif; }\n  .App__adjusters__adjuster {\n    display: flex; }\n    .App__adjusters__adjuster__active {\n      flex: 0 0 auto; }\n    .App__adjusters__adjuster__label {\n      flex: 1 1 auto; }\n    .App__adjusters__adjuster__picker {\n      flex: 0 0 auto; }\n  .App__layers {\n    position: relative;\n    width: 100%; }\n    .App__layers__layer {\n      width: 100%;\n      position: absolute;\n      top: 0;\n      left: 0; }\n      .App__layers__layer__static {\n        width: 100%;\n        height: auto; }\n", ""]);
 
 
 
@@ -125,7 +125,7 @@ exports.push([module.i, "", ""]);
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".HSLImage {\n  width: 100%;\n  height: auto; }\n", ""]);
 
 
 
@@ -25586,7 +25586,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                 const { url } = layerInitiator;
                 const layer = layers[url];
                 return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: url, className: "App__layers__layer" }, layerInitiator.static ?
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("img", { src: layerInitiator.url }) :
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("img", { className: "App__layers__layer__static", src: layerInitiator.url }) :
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_4__["default"], { pixels: layer.pixels, adjustment: layer.adjustment, adjust: layer.active, width: width, height: height }));
             }).reverse())));
     }

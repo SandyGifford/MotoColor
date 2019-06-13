@@ -1,17 +1,38 @@
 .App {
-	&__adjusters {
-		&__adjustment {
+	font-family: sans-serif;
 
+	&__adjusters {
+		&__adjuster {
+			display: flex;
+
+			&__active {
+				flex: 0 0 auto;
+			}
+
+			&__label {
+				flex: 1 1 auto;
+			}
+
+			&__picker {
+				flex: 0 0 auto;
+			}
 		}
 	}
 
 	&__layers {
 		position: relative;
+		width: 100%;
 
 		&__layer {
+			width: 100%;
 			position: absolute;
 			top: 0;
 			left: 0;
+
+			&__static {
+				width: 100%;
+				height: auto;
+			}
 		}
 	}
 }
