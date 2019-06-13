@@ -17,7 +17,7 @@ module.exports = {
 		index: "./src/index.tsx",
 	},
 	output: {
-		path: path.resolve(__dirname, "dist/build"),
+		path: path.resolve(__dirname, "gh-pages/build"),
 		filename: "[name].js",
 	},
 	module: {
@@ -28,7 +28,7 @@ module.exports = {
 			},
 			{
 				test: /\.scss$/,
-				use: [ "style-loader", "css-loader", "sass-loader" ]
+				use: ["style-loader", "css-loader", "sass-loader"]
 			},
 		]
 	},
