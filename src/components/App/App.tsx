@@ -57,7 +57,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 						[layerInitiator.url]: {
 							name: layerInitiator.name,
 							pixels: pixelData.pixels,
-							adjustment: { h: 0, s: 1, l: 1, a: 1 },
+							adjustment: { h: 0, s: 1, l: 0.5, a: 1 },
 							active: false,
 						},
 					},

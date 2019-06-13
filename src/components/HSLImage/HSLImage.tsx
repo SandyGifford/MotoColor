@@ -80,7 +80,7 @@ export default class HSLImage extends React.PureComponent<HSLImageProps, HSLImag
 		const adjusted = pixels.map(pixel => ({
 			h: adjustment.h,
 			s: NumberUtils.clamp(pixel.s * adjustment.s, 0, 1),
-			l: NumberUtils.clamp(pixel.l * adjustment.l, 0, 1),
+			l: pixel.l * adjustment.l * 2,
 			a: pixel.a,
 		}));
 

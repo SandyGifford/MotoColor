@@ -25571,7 +25571,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                     [layerInitiator.url]: {
                         name: layerInitiator.name,
                         pixels: pixelData.pixels,
-                        adjustment: { h: 0, s: 1, l: 1, a: 1 },
+                        adjustment: { h: 0, s: 1, l: 0.5, a: 1 },
                         active: false,
                     },
                 },
@@ -25901,7 +25901,7 @@ class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         const adjusted = pixels.map(pixel => ({
             h: adjustment.h,
             s: _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__["default"].clamp(pixel.s * adjustment.s, 0, 1),
-            l: _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__["default"].clamp(pixel.l * adjustment.l, 0, 1),
+            l: pixel.l * adjustment.l * 2,
             a: pixel.a,
         }));
         return adjusted;
