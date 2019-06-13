@@ -25529,25 +25529,25 @@ const layerInitiators = Object.freeze([
 class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     constructor(props) {
         super(props);
-        this.toggleActive = (url) => {
+        this.toggleActive = (name) => {
             let { layers } = this.state;
             this.setState({
                 layers: {
                     ...layers,
-                    [url]: {
-                        ...layers[url],
-                        active: !layers[url].active,
+                    [name]: {
+                        ...layers[name],
+                        active: !layers[name].active,
                     }
                 }
             });
         };
-        this.adjustmentChanged = (url, newColor) => {
+        this.adjustmentChanged = (name, newColor) => {
             let { layers } = this.state;
             this.setState({
                 layers: {
                     ...layers,
-                    [url]: {
-                        ...layers[url],
+                    [name]: {
+                        ...layers[name],
                         active: true,
                         adjustment: newColor,
                     }
@@ -25568,7 +25568,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
             this.setState({
                 layers: {
                     ...layers,
-                    [layerInitiator.url]: {
+                    [layerInitiator.name]: {
                         name: layerInitiator.name,
                         pixels: pixelData.pixels,
                         adjustment: { h: 0, s: 1, l: 0.5, a: 1 },
@@ -25579,7 +25579,24 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                 height: pixelData.height,
             });
         })))
-            .then(() => this.setState({ ready: true }));
+            .then(() => {
+            location.search.slice(1).split("&")
+                .forEach(item => {
+                const [name, color] = item.split("=");
+                const [h, s, l] = color.split(",");
+                this.adjustmentChanged(name, {
+                    h: parseFloat(h),
+                    s: parseFloat(s),
+                    l: parseFloat(l),
+                    a: 1
+                });
+            });
+            this.setState({ ready: true });
+        });
+    }
+    componentDidUpdate() {
+        if (this.state.ready)
+            this.updateURL();
     }
     render() {
         const { layers, width, height, ready } = this.state;
@@ -25587,23 +25604,36 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
             return null;
         return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App" },
             react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__adjusters" }, layerInitiators.map(layerInitiator => {
-                const { url, name } = layerInitiator;
-                const layer = layers[url];
+                const { name } = layerInitiator;
+                const layer = layers[name];
                 if (layerInitiator.static)
                     return null;
-                return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: url, className: "App__adjusters__adjuster" },
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("input", { className: "App__adjusters__adjuster__active", type: "checkbox", checked: layer.active, onChange: () => this.toggleActive(url) }),
+                return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: name, className: "App__adjusters__adjuster" },
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("input", { className: "App__adjusters__adjuster__active", type: "checkbox", checked: layer.active, onChange: () => this.toggleActive(name) }),
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__adjusters__adjuster__label" }, name),
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__adjusters__adjuster__picker" },
-                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLColorPicker_HSLColorPicker__WEBPACK_IMPORTED_MODULE_2__["default"], { color: layer.adjustment, onChange: color => this.adjustmentChanged(url, color) })));
+                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLColorPicker_HSLColorPicker__WEBPACK_IMPORTED_MODULE_2__["default"], { color: layer.adjustment, onChange: color => this.adjustmentChanged(name, color) })));
             })),
             react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__layers" }, layerInitiators.map(layerInitiator => {
-                const { url } = layerInitiator;
-                const layer = layers[url];
-                return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: url, className: "App__layers__layer" }, layerInitiator.static ?
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("img", { className: "App__layers__layer__static", src: layerInitiator.url }) :
+                const { name, url } = layerInitiator;
+                const layer = layers[name];
+                return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: name, className: "App__layers__layer" }, layerInitiator.static ?
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("img", { className: "App__layers__layer__static", src: url }) :
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_4__["default"], { pixels: layer.pixels, adjustment: layer.adjustment, adjust: layer.active, width: width, height: height }));
             }).reverse())));
+    }
+    updateURL() {
+        const { layers } = this.state;
+        const url = Object.keys(layers).map(name => {
+            const { adjustment, active } = layers[name];
+            const { h, s, l } = adjustment;
+            if (!active)
+                return null;
+            return `${encodeURIComponent(name)}=${h},${s},${l}`;
+        })
+            .filter(i => !!i)
+            .join("&");
+        window.history.pushState({}, "", `?${url}`);
     }
 }
 

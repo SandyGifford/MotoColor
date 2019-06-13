@@ -54,7 +54,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 				this.setState({
 					layers: {
 						...layers,
-						[layerInitiator.url]: {
+						[layerInitiator.name]: {
 							name: layerInitiator.name,
 							pixels: pixelData.pixels,
 							adjustment: { h: 0, s: 1, l: 0.5, a: 1 },
@@ -66,7 +66,26 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 				});
 			})
 		))
-			.then(() => this.setState({ ready: true }));
+			.then(() => {
+				location.search.slice(1).split("&")
+					.forEach(item => {
+						const [name, color] = item.split("=");
+						const [h, s, l] = color.split(",");
+
+						this.adjustmentChanged(name, {
+							h: parseFloat(h),
+							s: parseFloat(s),
+							l: parseFloat(l),
+							a: 1
+						})
+					});
+
+				this.setState({ ready: true });
+			});
+	}
+
+	public componentDidUpdate() {
+		if (this.state.ready) this.updateURL();
 	}
 
 	public render(): React.ReactNode {
@@ -79,22 +98,22 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 				<div className="App__adjusters">
 					{
 						layerInitiators.map(layerInitiator => {
-							const { url, name } = layerInitiator;
-							const layer = layers[url];
+							const { name } = layerInitiator;
+							const layer = layers[name];
 
 							if (layerInitiator.static) return null;
 
-							return <div key={url} className="App__adjusters__adjuster">
+							return <div key={name} className="App__adjusters__adjuster">
 								<input
 									className="App__adjusters__adjuster__active"
 									type="checkbox"
 									checked={layer.active}
-									onChange={() => this.toggleActive(url)} />
+									onChange={() => this.toggleActive(name)} />
 								<div className="App__adjusters__adjuster__label">{name}</div>
 								<div className="App__adjusters__adjuster__picker">
 									<HSLColorPicker
 										color={layer.adjustment}
-										onChange={color => this.adjustmentChanged(url, color)} />
+										onChange={color => this.adjustmentChanged(name, color)} />
 								</div>
 							</div>
 						})
@@ -103,13 +122,13 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 				<div className="App__layers">
 					{
 						layerInitiators.map(layerInitiator => {
-							const { url } = layerInitiator;
-							const layer = layers[url];
+							const { name, url } = layerInitiator;
+							const layer = layers[name];
 
-							return <div key={url} className="App__layers__layer">
+							return <div key={name} className="App__layers__layer">
 								{
 									layerInitiator.static ?
-										<img className="App__layers__layer__static" src={layerInitiator.url} /> :
+										<img className="App__layers__layer__static" src={url} /> :
 										<HSLImage
 											pixels={layer.pixels}
 											adjustment={layer.adjustment}
@@ -125,32 +144,52 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 		)
 	}
 
-	private toggleActive = (url: string) => {
+	private toggleActive = (name: string) => {
 		let { layers } = this.state;
 
 		this.setState({
 			layers: {
 				...layers,
-				[url]: {
-					...layers[url],
-					active: !layers[url].active,
+				[name]: {
+					...layers[name],
+					active: !layers[name].active,
 				}
 			}
 		});
 	};
 
-	private adjustmentChanged = (url: string, newColor: HSLColor) => {
+	private adjustmentChanged = (name: string, newColor: HSLColor) => {
 		let { layers } = this.state;
 
 		this.setState({
 			layers: {
 				...layers,
-				[url]: {
-					...layers[url],
+				[name]: {
+					...layers[name],
 					active: true,
 					adjustment: newColor,
 				}
 			}
 		});
 	};
+
+	private updateURL() {
+		const { layers } = this.state;
+
+		const url = Object.keys(layers).map(name => {
+			const { adjustment, active } = layers[name];
+			const { h, s, l } = adjustment;
+
+			if (!active) return null;
+			return `${encodeURIComponent(name)}=${h},${s},${l}`;
+		})
+			.filter(i => !!i)
+			.join("&");
+
+		window.history.pushState({}, "", `?${url}`);
+	}
+
+	// private getAdjustmentsFromUrl(): {[name: string]: HSLColor} {
+	// 	console
+	// }
 }
