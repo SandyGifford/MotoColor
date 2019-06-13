@@ -95,7 +95,7 @@
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".App {\n  font-family: sans-serif;\n  display: flex; }\n  .App__adjusters__adjuster {\n    display: flex; }\n    @media (min-width: 1000px) {\n      .App__adjusters__adjuster {\n        display: block; } }\n    .App__adjusters__adjuster__active {\n      flex: 0 0 auto; }\n      @media (min-width: 1000px) {\n        .App__adjusters__adjuster__active {\n          display: inline-block; } }\n    .App__adjusters__adjuster__label {\n      flex: 1 1 auto; }\n      @media (min-width: 1000px) {\n        .App__adjusters__adjuster__label {\n          display: inline-block; } }\n    .App__adjusters__adjuster__picker {\n      flex: 0 0 auto; }\n      @media (min-width: 1000px) {\n        .App__adjusters__adjuster__picker {\n          display: block; } }\n  .App__layers {\n    position: relative;\n    width: 100%; }\n    .App__layers__layer {\n      width: 100%;\n      position: absolute;\n      top: 0;\n      left: 0; }\n      .App__layers__layer__static {\n        width: 100%;\n        height: auto; }\n  @media (max-width: 1000px) {\n    .App {\n      flex-direction: column; } }\n", ""]);
+exports.push([module.i, ".App {\n  font-family: sans-serif;\n  display: flex;\n  user-select: none; }\n  .App__adjusters__adjuster {\n    display: flex; }\n    @media (min-width: 1000px) {\n      .App__adjusters__adjuster {\n        display: block; } }\n    .App__adjusters__adjuster__active {\n      flex: 0 0 auto; }\n      @media (min-width: 1000px) {\n        .App__adjusters__adjuster__active {\n          display: inline-block; } }\n    .App__adjusters__adjuster__label {\n      flex: 1 1 auto; }\n      @media (min-width: 1000px) {\n        .App__adjusters__adjuster__label {\n          display: inline-block; } }\n    .App__adjusters__adjuster__picker {\n      flex: 0 0 auto; }\n      @media (min-width: 1000px) {\n        .App__adjusters__adjuster__picker {\n          display: block; } }\n  .App__layers {\n    position: relative;\n    width: 100%; }\n    .App__layers__layer {\n      width: 100%;\n      position: absolute;\n      top: 0;\n      left: 0; }\n      .App__layers__layer__static {\n        width: 100%;\n        height: auto; }\n  @media (max-width: 1000px) {\n    .App {\n      flex-direction: column; } }\n", ""]);
 
 
 
@@ -25655,6 +25655,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils/ColorUtils */ "./src/utils/ColorUtils.ts");
+/* harmony import */ var _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/NumberUtils */ "./src/utils/NumberUtils.ts");
+
 
 
 
@@ -25686,7 +25688,7 @@ class ColorSlider extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         const { value, color } = this.props;
         return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "ColorSlider", ref: this.barRef, style: { backgroundImage: this.getGradient() }, onClick: this.barClicked },
             react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "ColorSlider__thumb", onMouseDown: this.dragStart, style: {
-                    left: `${100 * value}%`,
+                    left: `${100 * _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__["default"].clamp(value, 0, 1)}%`,
                     backgroundColor: _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__["default"].getCSSColor(color),
                 } })));
     }
@@ -25704,7 +25706,7 @@ class ColorSlider extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     setValueFromMousePosition(pos) {
         const left = this.barRef.current.offsetLeft;
         const width = this.barRef.current.offsetWidth;
-        this.props.onChange((pos - left) / width);
+        this.props.onChange(_utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__["default"].clamp((pos - left) / width, 0, 1));
     }
     getGradient() {
         const { backdrop } = this.props;
