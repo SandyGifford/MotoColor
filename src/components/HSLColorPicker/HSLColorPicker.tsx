@@ -45,7 +45,7 @@ export default class HSLColorPicker extends React.PureComponent<HSLColorPickerPr
 			s,
 			l,
 			a
-		})
+		});
 	};
 
 	private changeS: React.ChangeEventHandler<HTMLInputElement> = e => {
@@ -57,7 +57,7 @@ export default class HSLColorPicker extends React.PureComponent<HSLColorPickerPr
 			s: parseFloat(e.currentTarget.value) / 100,
 			l,
 			a
-		})
+		});
 	};
 
 	private changeL: React.ChangeEventHandler<HTMLInputElement> = e => {
@@ -69,6 +69,6 @@ export default class HSLColorPicker extends React.PureComponent<HSLColorPickerPr
 			s,
 			l: parseFloat(e.currentTarget.value) / 100,
 			a
-		})
+		});
 	};
 }

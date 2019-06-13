@@ -3,15 +3,18 @@ import "./HSLImage.style";
 import * as React from "react";
 import { HSLColor } from "@typings/color";
 import ColorUtils from "@utils/ColorUtils";
+import NumberUtils from "@utils/NumberUtils";
 
 export interface HSLImageProps {
 	pixels: HSLColor[];
+	adjustment: HSLColor;
+	adjust: boolean;
 	width: number;
 	height: number;
 }
 export interface HSLImageState { }
 
-export default class HSLImage extends React.Component<HSLImageProps, HSLImageState> {
+export default class HSLImage extends React.PureComponent<HSLImageProps, HSLImageState> {
 	private cvsRef: React.RefObject<HTMLCanvasElement> = React.createRef();
 	private ctx: CanvasRenderingContext2D;
 
@@ -36,8 +39,14 @@ export default class HSLImage extends React.Component<HSLImageProps, HSLImageSta
 		this.updateCanvas();
 	}
 
-	public componentDidUpdate() {
-		this.updateCanvas();
+	public componentDidUpdate(prevProps: HSLImageProps, prevState: HSLImageState) {
+		if (
+			this.props.adjustment.h !== prevProps.adjustment.h ||
+			this.props.adjustment.s !== prevProps.adjustment.s ||
+			this.props.adjustment.l !== prevProps.adjustment.l ||
+			(this.props.adjust && !prevProps.adjust)
+		)
+			this.updateCanvas();
 	}
 
 	private updateCanvas() {
@@ -48,8 +57,10 @@ export default class HSLImage extends React.Component<HSLImageProps, HSLImageSta
 		const imageData = this.ctx.getImageData(0, 0, width, height);
 		const { data } = imageData;
 
-		for (let i = 0; i < pixels.length; i++) {
-			const pixel = ColorUtils.hslToRGB(pixels[i]);
+		const adjustedPixels = this.getAdjustedPixels();
+
+		for (let i = 0; i < adjustedPixels.length; i++) {
+			const pixel = ColorUtils.hslToRGB(adjustedPixels[i]);
 			const pixelIndex = i * 4;
 
 			data[pixelIndex] = pixel.r;
@@ -59,5 +70,20 @@ export default class HSLImage extends React.Component<HSLImageProps, HSLImageSta
 		}
 
 		this.ctx.putImageData(imageData, 0, 0);
+	}
+
+	private getAdjustedPixels(): HSLColor[] {
+		const { adjustment, pixels, adjust } = this.props;
+
+		if (!adjust) return pixels;
+
+		const adjusted = pixels.map(pixel => ({
+			h: adjustment.h,
+			s: NumberUtils.clamp(pixel.s * adjustment.s, 0, 1),
+			l: NumberUtils.clamp(pixel.l * adjustment.l, 0, 1),
+			a: pixel.a,
+		}));
+
+		return adjusted;
 	}
 }

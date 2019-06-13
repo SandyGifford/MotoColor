@@ -4,9 +4,7 @@ import * as React from "react";
 import HSLColorPicker from "@components/HSLColorPicker/HSLColorPicker";
 import { HSLColor } from "@typings/color";
 import ImageUtils from "@utils/ImageUtils";
-import NumberUtils from "@utils/NumberUtils";
 import HSLImage from "@components/HSLImage/HSLImage";
-
 
 interface LayerInitiator {
 	url: string;
@@ -29,12 +27,12 @@ export interface AppState {
 	ready: boolean;
 }
 
-const layerInitiators: LayerInitiator[] = [
+const layerInitiators: LayerInitiator[] = Object.freeze([
 	{ name: "Tank", url: "/assets/images/tank.png" },
 	{ name: "Frame", url: "/assets/images/frame.png" },
 	{ name: "Fender", url: "/assets/images/fender.png" },
 	{ name: "Background", url: "/assets/images/background.png", static: true },
-];
+]) as LayerInitiator[];
 
 export default class App extends React.PureComponent<AppProps, AppState> {
 	constructor(props: AppProps) {
@@ -65,7 +63,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 					},
 					width: pixelData.width,
 					height: pixelData.height,
-				})
+				});
 			})
 		))
 			.then(() => this.setState({ ready: true }));
@@ -113,7 +111,9 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 									layerInitiator.static ?
 										<img src={layerInitiator.url} /> :
 										<HSLImage
-											pixels={this.getAdjustedPixels(layer)}
+											pixels={layer.pixels}
+											adjustment={layer.adjustment}
+											adjust={layer.active}
 											width={width}
 											height={height} />
 								}
@@ -123,20 +123,6 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 				</div>
 			</div>
 		)
-	}
-
-	private getAdjustedPixels(layer: HSLLayer): HSLColor[] {
-		const { adjustment, pixels, active } = layer;
-		if (!active) return pixels;
-
-		const adjusted = pixels.map(pixel => ({
-			h: adjustment.h,
-			s: NumberUtils.clamp(pixel.s * adjustment.s, 0, 1),
-			l: NumberUtils.clamp(pixel.l * adjustment.l, 0, 1),
-			a: pixel.a,
-		}));
-
-		return adjusted;
 	}
 
 	private toggleActive = (url: string) => {

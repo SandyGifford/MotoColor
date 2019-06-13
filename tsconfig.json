@@ -9,6 +9,7 @@
 		"alwaysStrict": true,
 		"jsx": "react",
 		"baseUrl": "./",
+		"sourceMap": true,
 		"paths": {
 			"@typings/*": [
 				"./src/typings/*"

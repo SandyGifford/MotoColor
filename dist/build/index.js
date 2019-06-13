@@ -25499,20 +25499,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_HSLColorPicker_HSLColorPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/HSLColorPicker/HSLColorPicker */ "./src/components/HSLColorPicker/HSLColorPicker.tsx");
 /* harmony import */ var _utils_ImageUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/ImageUtils */ "./src/utils/ImageUtils.ts");
-/* harmony import */ var _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/NumberUtils */ "./src/utils/NumberUtils.ts");
-/* harmony import */ var _components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @components/HSLImage/HSLImage */ "./src/components/HSLImage/HSLImage.tsx");
+/* harmony import */ var _components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @components/HSLImage/HSLImage */ "./src/components/HSLImage/HSLImage.tsx");
 
 
 
 
 
-
-const layerInitiators = [
+const layerInitiators = Object.freeze([
     { name: "Tank", url: "/assets/images/tank.png" },
     { name: "Frame", url: "/assets/images/frame.png" },
     { name: "Fender", url: "/assets/images/fender.png" },
     { name: "Background", url: "/assets/images/background.png", static: true },
-];
+]);
 class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     constructor(props) {
         super(props);
@@ -25589,20 +25587,8 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                 const layer = layers[url];
                 return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: url, className: "App__layers__layer" }, layerInitiator.static ?
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("img", { src: layerInitiator.url }) :
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_5__["default"], { pixels: this.getAdjustedPixels(layer), width: width, height: height }));
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_4__["default"], { pixels: layer.pixels, adjustment: layer.adjustment, adjust: layer.active, width: width, height: height }));
             }).reverse())));
-    }
-    getAdjustedPixels(layer) {
-        const { adjustment, pixels, active } = layer;
-        if (!active)
-            return pixels;
-        const adjusted = pixels.map(pixel => ({
-            h: adjustment.h,
-            s: _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_4__["default"].clamp(pixel.s * adjustment.s, 0, 1),
-            l: _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_4__["default"].clamp(pixel.l * adjustment.l, 0, 1),
-            a: pixel.a,
-        }));
-        return adjusted;
     }
 }
 
@@ -25753,10 +25739,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils/ColorUtils */ "./src/utils/ColorUtils.ts");
+/* harmony import */ var _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/NumberUtils */ "./src/utils/NumberUtils.ts");
 
 
 
-class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
+
+class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     constructor(props) {
         super(props);
         this.cvsRef = react__WEBPACK_IMPORTED_MODULE_1__["createRef"]();
@@ -25769,8 +25757,12 @@ class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
         this.ctx = this.cvsRef.current.getContext("2d");
         this.updateCanvas();
     }
-    componentDidUpdate() {
-        this.updateCanvas();
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.adjustment.h !== prevProps.adjustment.h ||
+            this.props.adjustment.s !== prevProps.adjustment.s ||
+            this.props.adjustment.l !== prevProps.adjustment.l ||
+            (this.props.adjust && !prevProps.adjust))
+            this.updateCanvas();
     }
     updateCanvas() {
         const { pixels, width, height } = this.props;
@@ -25778,8 +25770,9 @@ class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
             return;
         const imageData = this.ctx.getImageData(0, 0, width, height);
         const { data } = imageData;
-        for (let i = 0; i < pixels.length; i++) {
-            const pixel = _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__["default"].hslToRGB(pixels[i]);
+        const adjustedPixels = this.getAdjustedPixels();
+        for (let i = 0; i < adjustedPixels.length; i++) {
+            const pixel = _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__["default"].hslToRGB(adjustedPixels[i]);
             const pixelIndex = i * 4;
             data[pixelIndex] = pixel.r;
             data[pixelIndex + 1] = pixel.g;
@@ -25787,6 +25780,18 @@ class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
             data[pixelIndex + 3] = typeof pixel.a === "number" ? pixel.a : 255;
         }
         this.ctx.putImageData(imageData, 0, 0);
+    }
+    getAdjustedPixels() {
+        const { adjustment, pixels, adjust } = this.props;
+        if (!adjust)
+            return pixels;
+        const adjusted = pixels.map(pixel => ({
+            h: adjustment.h,
+            s: _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__["default"].clamp(pixel.s * adjustment.s, 0, 1),
+            l: _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__["default"].clamp(pixel.l * adjustment.l, 0, 1),
+            a: pixel.a,
+        }));
+        return adjusted;
     }
 }
 
