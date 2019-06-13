@@ -26182,9 +26182,11 @@ class ImageAdjuster {
             switch (message.type) {
                 case "basePixelsUpdated":
                     resolver.res();
+                    delete this.resolvers[message.id];
                     break;
                 case "pixelsAdjusted":
                     resolver.res(message.data);
+                    delete this.resolvers[message.id];
                     break;
                 default:
                     resolver.rej(`ImageAdjuster got unknown message type "${message.type}"`);
