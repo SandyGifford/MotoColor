@@ -4,6 +4,7 @@ import * as React from "react";
 import { HSLColor } from "@typings/color";
 import ColorUtils from "@utils/ColorUtils";
 import NumberUtils from "@utils/NumberUtils";
+import { ImageAdjuster } from "@workers/ImageAdjuster";
 
 export interface HSLImageProps {
 	pixels: HSLColor[];
@@ -17,10 +18,14 @@ export interface HSLImageState { }
 export default class HSLImage extends React.PureComponent<HSLImageProps, HSLImageState> {
 	private cvsRef: React.RefObject<HTMLCanvasElement> = React.createRef();
 	private ctx: CanvasRenderingContext2D;
+	private imageAdjuster = new ImageAdjuster();
 
 	constructor(props: HSLImageProps) {
 		super(props);
 		this.state = {};
+
+		this.imageAdjuster.setBasePixels(props.pixels)
+			.then(() => console.log("done"))
 	}
 
 	public render(): React.ReactNode {

@@ -11,6 +11,9 @@
 		"baseUrl": "./",
 		"sourceMap": true,
 		"paths": {
+			"@workers/*": [
+				"./src/workers/*"
+			],
 			"@typings/*": [
 				"./src/typings/*"
 			],

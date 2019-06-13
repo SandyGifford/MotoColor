@@ -25884,6 +25884,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils/ColorUtils */ "./src/utils/ColorUtils.ts");
 /* harmony import */ var _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/NumberUtils */ "./src/utils/NumberUtils.ts");
+/* harmony import */ var _workers_ImageAdjuster__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @workers/ImageAdjuster */ "./src/workers/ImageAdjuster.ts");
+
 
 
 
@@ -25892,7 +25894,10 @@ class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     constructor(props) {
         super(props);
         this.cvsRef = react__WEBPACK_IMPORTED_MODULE_1__["createRef"]();
+        this.imageAdjuster = new _workers_ImageAdjuster__WEBPACK_IMPORTED_MODULE_4__["ImageAdjuster"]();
         this.state = {};
+        this.imageAdjuster.setBasePixels(props.pixels)
+            .then(() => console.log("done"));
     }
     render() {
         return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("canvas", { className: "HSLImage", width: this.props.width, height: this.props.height, ref: this.cvsRef }));
@@ -26155,6 +26160,70 @@ __webpack_require__.r(__webpack_exports__);
 class NumberUtils {
     static clamp(val, min, max) {
         return Math.max(min, Math.min(max, val));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/workers/ImageAdjuster.ts":
+/*!**************************************!*\
+  !*** ./src/workers/ImageAdjuster.ts ***!
+  \**************************************/
+/*! exports provided: ImageAdjuster */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ImageAdjuster", function() { return ImageAdjuster; });
+class ImageAdjuster {
+    constructor(basePixels) {
+        this.id = 0;
+        this.resolvers = {};
+        this.worker = new Worker("assets/workers/adjustImage.js");
+        this.messageReceived = (e) => {
+            let message = e.data;
+            const resolver = this.resolvers[message.id];
+            if (!resolver)
+                throw `ImageAdjuster got unknown id ${message.id}`;
+            switch (message.type) {
+                case "basePixelsUpdated":
+                    resolver.res();
+                    break;
+                case "pixelsAdjusted":
+                    resolver.res(message.data);
+                    break;
+                default:
+                    throw `ImageAdjuster got unknown message type "${message.type}"`;
+            }
+        };
+        this.worker.addEventListener("message", this.messageReceived);
+        if (basePixels)
+            this.setBasePixels(basePixels);
+    }
+    setBasePixels(basePixels) {
+        const id = this.id++;
+        const message = {
+            id: id,
+            type: "setBasePixels",
+            data: basePixels,
+        };
+        this.worker.postMessage(message);
+        return new Promise((res, rej) => {
+            this.resolvers[id] = { res, rej };
+        });
+    }
+    adjustImage(adjustment) {
+        const id = this.id++;
+        const message = {
+            id: id,
+            type: "adjustImage",
+            data: adjustment,
+        };
+        this.worker.postMessage(message);
+        return new Promise((res, rej) => {
+            this.resolvers[id] = { res, rej };
+        });
     }
 }
 
