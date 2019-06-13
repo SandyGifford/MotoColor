@@ -1,46 +1,97 @@
 import "./ColorSlider.style";
 
 import * as React from "react";
-import { RGBColor, HSLColor } from "@typings/color";
+import { HSLColor } from "@typings/color";
 import ColorUtils from "@utils/ColorUtils";
 
 export type ColorSliderChangeHandler = (value: number) => void;
-export type ColorSliderBackdropRenderer = (frac: number) => RGBColor | HSLColor;
 
 export interface ColorSliderProps {
 	value: number;
 	onChange: ColorSliderChangeHandler;
-	backdrop?: (RGBColor | HSLColor)[];
-	backdropRender?: ColorSliderBackdropRenderer;
+	backdrop: HSLColor[];
+	color: HSLColor;
 }
-export interface ColorSliderState { }
+export interface ColorSliderState {
+	dragOffset: number;
+}
 
 export default class ColorSlider extends React.PureComponent<ColorSliderProps, ColorSliderState> {
+	private barRef: React.RefObject<HTMLDivElement> = React.createRef();
+
 	constructor(props: ColorSliderProps) {
 		super(props);
-		this.state = {};
+		this.state = {
+			dragOffset: 0,
+		};
 	}
 
 	public render(): React.ReactNode {
+		const { value, color } = this.props;
+
 		return (
-			<div className="ColorSlider" style={{ backgroundImage: this.getGradient() }}>
-				{this.getRenderedBackdrop()}
+			<div
+				className="ColorSlider"
+				ref={this.barRef}
+				style={{ backgroundImage: this.getGradient() }}
+				onClick={this.barClicked}>
+				<div
+					className="ColorSlider__thumb"
+					onMouseDown={this.dragStart}
+					style={{
+						left: `${100 * value}%`,
+						backgroundColor: ColorUtils.getCSSColor(color),
+					}} />
 			</div>
 		)
 	}
 
-	private getGradient(): string {
-		const { backdrop } = this.props;
-		if (!backdrop) return null;
-
-		const colors = backdrop.map((color, i) => `${ColorUtils.getCSSColor(color)} ${100 * i / (backdrop.length - 1)}%`);
-		return `linear-gradient(to right, ${colors.join(", ")})`
+	public componentWillUnmount() {
+		this.removeragListeners();
 	}
 
-	private getRenderedBackdrop(): React.ReactNode {
-		const { backdropRender } = this.props;
-		if (!backdropRender) return null;
+	private barClicked: React.MouseEventHandler<HTMLDivElement> = e => {
+		this.setValueFromMousePosition(e.clientX);
+	};
 
-		return <canvas className="ColorSlider__cvs" />;
+	private addDragListeners() {
+		document.addEventListener("mousemove", this.drag);
+		document.addEventListener("mouseup", this.endDrag);
+	}
+
+	private removeragListeners() {
+		document.removeEventListener("mousemove", this.drag);
+		document.removeEventListener("mouseup", this.endDrag);
+	}
+
+	private dragStart: React.MouseEventHandler<HTMLDivElement> = e => {
+		const rect = e.currentTarget.getBoundingClientRect();
+
+		this.setState({
+			dragOffset: e.clientX - rect.left,
+		});
+
+		this.addDragListeners();
+	};
+
+	private drag = (e: MouseEvent) => {
+		this.setValueFromMousePosition(e.clientX - this.state.dragOffset);
+	};
+
+	private endDrag = () => {
+		this.removeragListeners();
+	};
+
+	private setValueFromMousePosition(pos: number) {
+		const left = this.barRef.current.offsetLeft;
+		const width = this.barRef.current.offsetWidth;
+
+		this.props.onChange((pos - left) / width);
+	}
+
+	private getGradient(): string {
+		const { backdrop } = this.props;
+		const colors = backdrop.map((color, i) => `${ColorUtils.getCSSColor(color)} ${100 * i / (backdrop.length - 1)}%`);
+		return `linear-gradient(to right, ${colors.join(", ")})`
 	}
 }

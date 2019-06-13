@@ -1,4 +1,37 @@
 .ColorSlider {
-	width: 100%;
-	height: 1em;
+	$borderThumbSize: 0.5em;
+	$barHeight: 1em;
+
+	position: relative;
+	min-width: 10em;
+	height: $barHeight;
+	margin: 2.5 * $borderThumbSize (1.5 * $borderThumbSize + $barHeight / 2);
+
+	border-radius: $barHeight / 4;
+	box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);
+	cursor: pointer;
+
+	&__thumb {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: $barHeight;
+		width: $barHeight;
+		margin-left: -$barHeight / 2;
+
+		box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);
+
+		cursor: pointer;
+
+		&::after {
+			content: "";
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			border: solid $borderThumbSize #333;
+			top: -$borderThumbSize;
+			left: -$borderThumbSize;
+			border-radius: $borderThumbSize;
+		}
+	}
 }

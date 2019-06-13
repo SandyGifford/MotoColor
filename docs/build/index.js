@@ -101,6 +101,21 @@ exports.push([module.i, ".App {\n  font-family: sans-serif;\n  display: flex; }\
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/ColorSlider/ColorSlider.style.scss":
+/*!******************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/ColorSlider/ColorSlider.style.scss ***!
+  \******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+// Module
+exports.push([module.i, ".ColorSlider {\n  position: relative;\n  min-width: 10em;\n  height: 1em;\n  margin: 1.25em 1.25em;\n  border-radius: 0.25em;\n  box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n  cursor: pointer; }\n  .ColorSlider__thumb {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 1em;\n    width: 1em;\n    margin-left: -0.5em;\n    box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n    cursor: pointer; }\n    .ColorSlider__thumb::after {\n      content: \"\";\n      position: absolute;\n      width: 100%;\n      height: 100%;\n      border: solid 0.5em #333;\n      top: -0.5em;\n      left: -0.5em;\n      border-radius: 0.5em; }\n", ""]);
+
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/HSLColorPicker/HSLColorPicker.style.scss":
 /*!************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/HSLColorPicker/HSLColorPicker.style.scss ***!
@@ -25595,6 +25610,112 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
 
 /***/ }),
 
+/***/ "./src/components/ColorSlider/ColorSlider.style.scss":
+/*!***********************************************************!*\
+  !*** ./src/components/ColorSlider/ColorSlider.style.scss ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./ColorSlider.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/ColorSlider/ColorSlider.style.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/components/ColorSlider/ColorSlider.tsx":
+/*!****************************************************!*\
+  !*** ./src/components/ColorSlider/ColorSlider.tsx ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ColorSlider; });
+/* harmony import */ var _ColorSlider_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ColorSlider.style */ "./src/components/ColorSlider/ColorSlider.style.scss");
+/* harmony import */ var _ColorSlider_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ColorSlider_style__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils/ColorUtils */ "./src/utils/ColorUtils.ts");
+
+
+
+class ColorSlider extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
+    constructor(props) {
+        super(props);
+        this.barRef = react__WEBPACK_IMPORTED_MODULE_1__["createRef"]();
+        this.barClicked = e => {
+            this.setValueFromMousePosition(e.clientX);
+        };
+        this.dragStart = e => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            this.setState({
+                dragOffset: e.clientX - rect.left,
+            });
+            this.addDragListeners();
+        };
+        this.drag = (e) => {
+            this.setValueFromMousePosition(e.clientX - this.state.dragOffset);
+        };
+        this.endDrag = () => {
+            this.removeragListeners();
+        };
+        this.state = {
+            dragOffset: 0,
+        };
+    }
+    render() {
+        const { value, color } = this.props;
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "ColorSlider", ref: this.barRef, style: { backgroundImage: this.getGradient() }, onClick: this.barClicked },
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "ColorSlider__thumb", onMouseDown: this.dragStart, style: {
+                    left: `${100 * value}%`,
+                    backgroundColor: _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__["default"].getCSSColor(color),
+                } })));
+    }
+    componentWillUnmount() {
+        this.removeragListeners();
+    }
+    addDragListeners() {
+        document.addEventListener("mousemove", this.drag);
+        document.addEventListener("mouseup", this.endDrag);
+    }
+    removeragListeners() {
+        document.removeEventListener("mousemove", this.drag);
+        document.removeEventListener("mouseup", this.endDrag);
+    }
+    setValueFromMousePosition(pos) {
+        const left = this.barRef.current.offsetLeft;
+        const width = this.barRef.current.offsetWidth;
+        this.props.onChange((pos - left) / width);
+    }
+    getGradient() {
+        const { backdrop } = this.props;
+        const colors = backdrop.map((color, i) => `${_utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__["default"].getCSSColor(color)} ${100 * i / (backdrop.length - 1)}%`);
+        return `linear-gradient(to right, ${colors.join(", ")})`;
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/components/HSLColorPicker/HSLColorPicker.style.scss":
 /*!*****************************************************************!*\
   !*** ./src/components/HSLColorPicker/HSLColorPicker.style.scss ***!
@@ -25639,55 +25760,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _HSLColorPicker_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_HSLColorPicker_style__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils/NumberUtils */ "./src/utils/NumberUtils.ts");
+/* harmony import */ var _components_ColorSlider_ColorSlider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/ColorSlider/ColorSlider */ "./src/components/ColorSlider/ColorSlider.tsx");
 
 
 
 class HSLColorPicker extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     constructor(props) {
         super(props);
-        this.changeH = e => {
+        this.changeH = val => {
             const { color, onChange } = this.props;
-            const { s, l, a } = color;
-            onChange({
-                h: parseFloat(e.currentTarget.value) / 360,
-                s,
-                l,
-                a
-            });
+            onChange({ ...color, h: val });
         };
-        this.changeS = e => {
+        this.changeS = val => {
             const { color, onChange } = this.props;
-            const { h, l, a } = color;
-            onChange({
-                h,
-                s: parseFloat(e.currentTarget.value) / 100,
-                l,
-                a
-            });
+            onChange({ ...color, s: val });
         };
-        this.changeL = e => {
+        this.changeL = val => {
             const { color, onChange } = this.props;
-            const { h, s, a } = color;
-            onChange({
-                h,
-                s,
-                l: parseFloat(e.currentTarget.value) / 100,
-                a
-            });
+            onChange({ ...color, l: val });
         };
         this.state = {};
     }
     render() {
         const { color } = this.props;
         return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "HSLColorPicker" },
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("input", { type: "number", value: this.getComponent(color.h, 360), onChange: this.changeH }),
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("input", { type: "number", value: this.getComponent(color.s, 100), onChange: this.changeS }),
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("input", { type: "number", value: this.getComponent(color.l, 100), onChange: this.changeL })));
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ColorSlider_ColorSlider__WEBPACK_IMPORTED_MODULE_2__["default"], { value: color.h, color: { h: color.h, s: 1, l: 0.5, a: 1 }, onChange: this.changeH, backdrop: this.getHSLRainbow() }),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ColorSlider_ColorSlider__WEBPACK_IMPORTED_MODULE_2__["default"], { value: color.s, color: { h: color.h, s: color.s, l: 0.5, a: 1 }, onChange: this.changeS, backdrop: [{ h: 0, s: 0, l: 0.5, a: 1 }, { h: 1, s: 1, l: 0.5, a: 1 }] }),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ColorSlider_ColorSlider__WEBPACK_IMPORTED_MODULE_2__["default"], { value: color.l, color: { h: 0, s: 0, l: color.l, a: 1 }, onChange: this.changeL, backdrop: [{ h: 0, s: 0, l: 0, a: 1 }, { h: 0, s: 0, l: 1, a: 1 }] })));
     }
-    getComponent(val, max) {
-        const numVal = Math.round(max * _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_2__["default"].clamp(val, 0, 1));
-        return isNaN(numVal) || typeof numVal !== "number" ? "" : numVal + "";
+    getHSLRainbow() {
+        const colors = [];
+        for (let i = 0; i < 10; i++) {
+            colors.push({
+                h: i / 10,
+                s: 1,
+                l: 0.5,
+                a: 1
+            });
+        }
+        return colors;
     }
 }
 
