@@ -189,8 +189,4 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 
 		window.history.pushState({}, "", `?${url}`);
 	}
-
-	// private getAdjustmentsFromUrl(): {[name: string]: HSLColor} {
-	// 	console
-	// }
 }
