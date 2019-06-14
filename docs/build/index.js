@@ -25898,7 +25898,6 @@ class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
             const { workerReady, processing } = this.state;
             if (!pixels.length || !adjust || !workerReady || processing)
                 return;
-            console.log("updating");
             this.setState({
                 processing: true,
             });

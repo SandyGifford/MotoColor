@@ -69,7 +69,6 @@ export default class HSLImage extends React.PureComponent<HSLImageProps, HSLImag
 		const { workerReady, processing } = this.state;
 
 		if (!pixels.length || !adjust || !workerReady || processing) return;
-		console.log("updating");
 
 		this.setState({
 			processing: true,
