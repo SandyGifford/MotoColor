@@ -52,6 +52,7 @@ export default class ColorSlider extends React.PureComponent<ColorSliderProps, C
 	}
 
 	private barClicked: React.MouseEventHandler<HTMLDivElement> = e => {
+		if (e.target !== e.currentTarget) return;
 		this.setValueFromMousePosition(e.clientX);
 	};
 
@@ -79,7 +80,9 @@ export default class ColorSlider extends React.PureComponent<ColorSliderProps, C
 		this.setValueFromMousePosition(e.clientX - this.state.dragOffset);
 	};
 
-	private endDrag = () => {
+	private endDrag = (e: MouseEvent) => {
+		e.preventDefault();
+		e.stopPropagation();
 		this.removeragListeners();
 	};
 

@@ -25696,6 +25696,8 @@ class ColorSlider extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         super(props);
         this.barRef = react__WEBPACK_IMPORTED_MODULE_1__["createRef"]();
         this.barClicked = e => {
+            if (e.target !== e.currentTarget)
+                return;
             this.setValueFromMousePosition(e.clientX);
         };
         this.dragStart = e => {
@@ -25708,7 +25710,9 @@ class ColorSlider extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         this.drag = (e) => {
             this.setValueFromMousePosition(e.clientX - this.state.dragOffset);
         };
-        this.endDrag = () => {
+        this.endDrag = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             this.removeragListeners();
         };
         this.state = {
