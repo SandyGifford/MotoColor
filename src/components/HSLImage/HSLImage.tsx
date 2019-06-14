@@ -14,6 +14,7 @@ export interface HSLImageProps {
 }
 export interface HSLImageState {
 	workerReady: boolean;
+	processing: boolean;
 }
 
 export default class HSLImage extends React.PureComponent<HSLImageProps, HSLImageState> {
@@ -25,6 +26,7 @@ export default class HSLImage extends React.PureComponent<HSLImageProps, HSLImag
 		super(props);
 		this.state = {
 			workerReady: false,
+			processing: false,
 		};
 
 		this.imageAdjuster.setBasePixels(props.pixels)
@@ -64,9 +66,14 @@ export default class HSLImage extends React.PureComponent<HSLImageProps, HSLImag
 
 	private updateCanvas = () => {
 		const { pixels, width, height, adjustment, adjust } = this.props;
-		const { workerReady } = this.state;
+		const { workerReady, processing } = this.state;
 
-		if (!pixels.length || !adjust || !workerReady) return;
+		if (!pixels.length || !adjust || !workerReady || processing) return;
+		console.log("updating");
+
+		this.setState({
+			processing: true,
+		});
 
 		this.imageAdjuster.adjustImage(adjustment)
 			.then(adjustedPixels => {
@@ -84,6 +91,19 @@ export default class HSLImage extends React.PureComponent<HSLImageProps, HSLImag
 				}
 
 				this.ctx.putImageData(imageData, 0, 0);
+
+				this.setState({
+					processing: false,
+				}, () => {
+					const newAdjustment = this.props.adjustment;
+
+					if (
+						newAdjustment.h !== adjustment.h ||
+						newAdjustment.s !== adjustment.s ||
+						newAdjustment.l !== adjustment.l
+					)
+						this.updateCanvas();
+				});
 			});
 	}
 }

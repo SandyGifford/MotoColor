@@ -25895,9 +25895,13 @@ class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         this.imageAdjuster = new _workers_ImageAdjuster__WEBPACK_IMPORTED_MODULE_3__["ImageAdjuster"]();
         this.updateCanvas = () => {
             const { pixels, width, height, adjustment, adjust } = this.props;
-            const { workerReady } = this.state;
-            if (!pixels.length || !adjust || !workerReady)
+            const { workerReady, processing } = this.state;
+            if (!pixels.length || !adjust || !workerReady || processing)
                 return;
+            console.log("updating");
+            this.setState({
+                processing: true,
+            });
             this.imageAdjuster.adjustImage(adjustment)
                 .then(adjustedPixels => {
                 const imageData = this.ctx.getImageData(0, 0, width, height);
@@ -25911,10 +25915,20 @@ class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                     data[pixelIndex + 3] = typeof pixel.a === "number" ? pixel.a : 255;
                 }
                 this.ctx.putImageData(imageData, 0, 0);
+                this.setState({
+                    processing: false,
+                }, () => {
+                    const newAdjustment = this.props.adjustment;
+                    if (newAdjustment.h !== adjustment.h ||
+                        newAdjustment.s !== adjustment.s ||
+                        newAdjustment.l !== adjustment.l)
+                        this.updateCanvas();
+                });
             });
         };
         this.state = {
             workerReady: false,
+            processing: false,
         };
         this.imageAdjuster.setBasePixels(props.pixels)
             .then(() => this.setState({
