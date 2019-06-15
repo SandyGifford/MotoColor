@@ -1,5 +1,8 @@
 const path = require("path");
-const tsconfig = require("./tsconfig")
+const tsconfig = require("./tsconfig");
+var glob = require("glob");
+
+console.log(glob.sync("./src/**/*.worker.ts"));
 
 const tsPaths = tsconfig.compilerOptions.paths;
 const tsPathKeys = Object.keys(tsPaths)
@@ -15,6 +18,11 @@ module.exports = {
 	mode: "development",
 	entry: {
 		index: "./src/index.tsx",
+		...glob.sync("./src/**/*.worker.ts").reduce((obj, path) => {
+			const [, name] = path.match(/\.\/src\/.*\/(.*)\.worker\.ts/);
+			obj[`workers/${name}`] = path;
+			return obj;
+		}, {}),
 	},
 	output: {
 		path: path.resolve(__dirname, "docs/build"),

@@ -38,7 +38,7 @@ interface PromiseResolvers<T> {
 export class ImageAdjuster {
 	private id = 0;
 	private resolvers: { [id: number]: PromiseResolvers<any> } = {};
-	private readonly worker = new Worker("assets/workers/adjustImage.js");
+	private readonly worker = new Worker("build/workers/imageAdjuster.js");
 
 	constructor(basePixels?: HSLColor[]) {
 		this.worker.addEventListener("message", this.messageReceived);

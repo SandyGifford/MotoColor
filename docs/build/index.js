@@ -26190,7 +26190,7 @@ class ImageAdjuster {
     constructor(basePixels) {
         this.id = 0;
         this.resolvers = {};
-        this.worker = new Worker("assets/workers/adjustImage.js");
+        this.worker = new Worker("build/workers/imageAdjuster.js");
         this.messageReceived = (e) => {
             let message = e.data;
             const resolver = this.resolvers[message.id];
