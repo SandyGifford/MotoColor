@@ -13,7 +13,7 @@ interface PromiseResolvers<T> {
 
 export class ImageAdjuster {
 	// TODO: THIS WORKER WILL BREAK IF A CALL IS MADE TO IT BEFORE THE PREVIOUS ONE COMPLETES
-	// as it is the code is set up to not make multiple calls to the worker at once.  Still,
+	// as it is, the code is set up to not make multiple calls to the worker at once.  Still,
 	// there should be a contingency for it.
 	private transferablePixelBuffer: ArrayBuffer;
 	private id = 0;
