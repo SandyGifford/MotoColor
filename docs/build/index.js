@@ -95,7 +95,7 @@
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".App {\n  font-family: sans-serif;\n  display: flex;\n  user-select: none; }\n  .App__adjusters__adjuster {\n    display: flex; }\n    @media (min-width: 1000px) {\n      .App__adjusters__adjuster {\n        display: block; } }\n    .App__adjusters__adjuster__active {\n      flex: 0 0 auto; }\n      @media (min-width: 1000px) {\n        .App__adjusters__adjuster__active {\n          display: inline-block; } }\n    .App__adjusters__adjuster__label {\n      flex: 1 1 auto; }\n      @media (min-width: 1000px) {\n        .App__adjusters__adjuster__label {\n          display: inline-block; } }\n    .App__adjusters__adjuster__picker {\n      flex: 0 0 auto; }\n      @media (min-width: 1000px) {\n        .App__adjusters__adjuster__picker {\n          display: block; } }\n  .App__layers {\n    position: relative;\n    width: 100%; }\n    .App__layers__layer {\n      width: 100%;\n      position: absolute;\n      top: 0;\n      left: 0; }\n      .App__layers__layer__static {\n        width: 100%;\n        height: auto; }\n  @media (max-width: 1000px) {\n    .App {\n      flex-direction: column; } }\n", ""]);
+exports.push([module.i, ".App {\n  font-family: sans-serif;\n  display: flex;\n  user-select: none; }\n  .App__adjusters__adjuster {\n    display: flex; }\n    @media (min-width: 1000px) {\n      .App__adjusters__adjuster {\n        display: block; } }\n    .App__adjusters__adjuster__active {\n      flex: 0 0 auto; }\n      @media (min-width: 1000px) {\n        .App__adjusters__adjuster__active {\n          display: inline-block; } }\n    .App__adjusters__adjuster__label {\n      flex: 1 1 auto; }\n      @media (min-width: 1000px) {\n        .App__adjusters__adjuster__label {\n          display: inline-block; } }\n    .App__adjusters__adjuster__picker {\n      flex: 0 0 auto; }\n      @media (min-width: 1000px) {\n        .App__adjusters__adjuster__picker {\n          display: block; } }\n  .App__layers {\n    position: relative;\n    width: 100%; }\n    .App__layers__layer {\n      width: 100%;\n      height: 0;\n      position: absolute;\n      top: 0;\n      left: 0; }\n      .App__layers__layer__img {\n        position: absolute; }\n        .App__layers__layer__img--static {\n          width: 100%;\n          height: auto; }\n  @media (max-width: 1000px) {\n    .App {\n      flex-direction: column; } }\n", ""]);
 
 
 
@@ -25522,9 +25522,9 @@ __webpack_require__.r(__webpack_exports__);
 
 const layerInitiators = Object.freeze([
     // { name: "Test Pattern", url: "assets/images/test_pattern.png" },
-    { name: "Tank", url: "assets/images/tank.png" },
-    { name: "Frame", url: "assets/images/frame.png" },
-    { name: "Fender", url: "assets/images/fender.png" },
+    { name: "Tank", url: "assets/images/tank.png", x: 0.20858135, y: 0.25 },
+    { name: "Frame", url: "assets/images/frame.png", x: 0.21825397, y: 0.38921958 },
+    { name: "Fender", url: "assets/images/fender.png", x: 0.15228175, y: 0.46164021 },
     { name: "Background", url: "assets/images/background.png", static: true },
 ]);
 class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
@@ -25557,9 +25557,9 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         };
         this.state = {
             layers: {},
-            width: 0,
-            height: 0,
             ready: false,
+            fullWidth: 0,
+            fullHeight: 0,
         };
     }
     componentDidMount() {
@@ -25574,13 +25574,16 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                         pixels: pixelData.pixels,
                         adjustment: [0, 255, 128, 255],
                         active: false,
+                        width: pixelData.width,
+                        height: pixelData.height,
+                        x: layerInitiator.x || 0,
+                        y: layerInitiator.y || 0,
                     },
                 },
-                width: pixelData.width,
-                height: pixelData.height,
             });
         })))
             .then(() => {
+            const backgroundLayer = this.state.layers["Background"];
             location.search.slice(1).split("&")
                 .filter(item => !!item)
                 .forEach(item => {
@@ -25593,7 +25596,11 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                     a: 1
                 });
             });
-            this.setState({ ready: true });
+            this.setState({
+                ready: true,
+                fullWidth: backgroundLayer.width,
+                fullHeight: backgroundLayer.height,
+            });
         });
     }
     componentDidUpdate() {
@@ -25601,7 +25608,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
             this.updateURL();
     }
     render() {
-        const { layers, width, height, ready } = this.state;
+        const { layers, ready, fullWidth, fullHeight } = this.state;
         if (!ready)
             return null;
         return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App" },
@@ -25624,9 +25631,17 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
             react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__layers" }, layerInitiators.map(layerInitiator => {
                 const { name, url } = layerInitiator;
                 const layer = layers[name];
-                return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: name, className: "App__layers__layer" }, layerInitiator.static ?
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("img", { className: "App__layers__layer__static", src: url }) :
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_4__["default"], { pixels: layer.pixels, adjustment: layer.adjustment, adjust: layer.active, width: width, height: height }));
+                return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: name, className: "App__layers__layer", style: {
+                        paddingBottom: `${100 * fullHeight / fullWidth}%`,
+                    } }, layerInitiator.static ?
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("img", { className: "App__layers__layer__img App__layers__layer__img--static", src: url }) :
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__layers__layer__img", style: {
+                            top: `${100 * layer.y}%`,
+                            left: `${100 * layer.x}%`,
+                            width: `${100 * layer.width / fullWidth}%`,
+                            height: `${100 * layer.height / fullHeight}%`,
+                        } },
+                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_4__["default"], { pixels: layer.pixels, adjustment: layer.adjustment, adjust: layer.active, width: layer.width, height: layer.height })));
             }).reverse())));
     }
     updateURL() {

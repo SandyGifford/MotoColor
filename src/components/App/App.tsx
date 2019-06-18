@@ -10,11 +10,17 @@ interface LayerInitiator {
 	url: string;
 	name: string;
 	static?: boolean;
+	x?: number;
+	y?: number;
 }
 
 interface HSLLayer {
 	name: string;
 	pixels: Uint8ClampedArray;
+	width: number;
+	height: number;
+	x: number;
+	y: number;
 	adjustment: ArrayColor;
 	active: boolean;
 }
@@ -22,16 +28,16 @@ interface HSLLayer {
 export interface AppProps { }
 export interface AppState {
 	layers: { [urls: string]: HSLLayer };
-	width: number;
-	height: number;
 	ready: boolean;
+	fullWidth: number;
+	fullHeight: number;
 }
 
 const layerInitiators: LayerInitiator[] = Object.freeze([
 	// { name: "Test Pattern", url: "assets/images/test_pattern.png" },
-	{ name: "Tank", url: "assets/images/tank.png" },
-	{ name: "Frame", url: "assets/images/frame.png" },
-	{ name: "Fender", url: "assets/images/fender.png" },
+	{ name: "Tank", url: "assets/images/tank.png", x: 0.20858135, y: 0.25 },
+	{ name: "Frame", url: "assets/images/frame.png", x: 0.21825397, y: 0.38921958 },
+	{ name: "Fender", url: "assets/images/fender.png", x: 0.15228175, y: 0.46164021 },
 	{ name: "Background", url: "assets/images/background.png", static: true },
 ]) as LayerInitiator[];
 
@@ -41,9 +47,9 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 
 		this.state = {
 			layers: {},
-			width: 0,
-			height: 0,
 			ready: false,
+			fullWidth: 0,
+			fullHeight: 0,
 		};
 	}
 
@@ -60,14 +66,18 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 							pixels: pixelData.pixels,
 							adjustment: [0, 255, 128, 255],
 							active: false,
+							width: pixelData.width,
+							height: pixelData.height,
+							x: layerInitiator.x || 0,
+							y: layerInitiator.y || 0,
 						},
 					},
-					width: pixelData.width,
-					height: pixelData.height,
 				});
 			})
 		))
 			.then(() => {
+				const backgroundLayer = this.state.layers["Background"];
+
 				location.search.slice(1).split("&")
 					.filter(item => !!item)
 					.forEach(item => {
@@ -82,7 +92,11 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 						})
 					});
 
-				this.setState({ ready: true });
+				this.setState({
+					ready: true,
+					fullWidth: backgroundLayer.width,
+					fullHeight: backgroundLayer.height,
+				});
 			});
 	}
 
@@ -91,7 +105,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 	}
 
 	public render(): React.ReactNode {
-		const { layers, width, height, ready } = this.state;
+		const { layers, ready, fullWidth, fullHeight } = this.state;
 
 		if (!ready) return null;
 
@@ -132,16 +146,30 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 							const { name, url } = layerInitiator;
 							const layer = layers[name];
 
-							return <div key={name} className="App__layers__layer">
+							return <div
+								key={name}
+								className="App__layers__layer"
+								style={{
+									paddingBottom: `${100 * fullHeight / fullWidth}%`,
+								}}>
 								{
 									layerInitiator.static ?
-										<img className="App__layers__layer__static" src={url} /> :
-										<HSLImage
-											pixels={layer.pixels}
-											adjustment={layer.adjustment}
-											adjust={layer.active}
-											width={width}
-											height={height} />
+										<img className="App__layers__layer__img App__layers__layer__img--static" src={url} /> :
+										<div
+											className="App__layers__layer__img"
+											style={{
+												top: `${100 * layer.y}%`,
+												left: `${100 * layer.x}%`,
+												width: `${100 * layer.width / fullWidth}%`,
+												height: `${100 * layer.height / fullHeight}%`,
+											}}>
+											<HSLImage
+												pixels={layer.pixels}
+												adjustment={layer.adjustment}
+												adjust={layer.active}
+												width={layer.width}
+												height={layer.height} />
+										</div>
 								}
 							</div>
 						}).reverse()

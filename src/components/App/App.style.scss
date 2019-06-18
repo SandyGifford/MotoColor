@@ -43,13 +43,18 @@
 
 		&__layer {
 			width: 100%;
+			height:  0;
 			position: absolute;
 			top: 0;
 			left: 0;
 
-			&__static {
-				width: 100%;
-				height: auto;
+			&__img {
+				position: absolute;
+				
+				&--static {
+					width: 100%;
+					height: auto;
+				}
 			}
 		}
 	}
