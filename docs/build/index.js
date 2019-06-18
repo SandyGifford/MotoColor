@@ -25925,7 +25925,11 @@ class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         this.updateCanvas = () => {
             const { pixels, width, height, adjustment, adjust } = this.props;
             const { workerReady, processing } = this.state;
-            if (!pixels.length || !adjust || !workerReady || processing)
+            if (!adjust) {
+                this.ctx.clearRect(0, 0, width, height);
+                return;
+            }
+            if (!pixels.length || !workerReady || processing)
                 return;
             this.setState({
                 processing: true,
@@ -25974,7 +25978,7 @@ class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         if (adjustment[0] !== prevProps.adjustment[0] ||
             adjustment[1] !== prevProps.adjustment[1] ||
             adjustment[2] !== prevProps.adjustment[2] ||
-            (adjust && !prevProps.adjust))
+            adjust !== prevProps.adjust)
             this.updateCanvas();
     }
 }

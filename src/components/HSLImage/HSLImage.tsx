@@ -62,7 +62,7 @@ export default class HSLImage extends React.PureComponent<HSLImageProps, HSLImag
 			adjustment[0] !== prevProps.adjustment[0] ||
 			adjustment[1] !== prevProps.adjustment[1] ||
 			adjustment[2] !== prevProps.adjustment[2] ||
-			(adjust && !prevProps.adjust)
+			adjust !== prevProps.adjust
 		)
 			this.updateCanvas();
 	}
@@ -71,7 +71,12 @@ export default class HSLImage extends React.PureComponent<HSLImageProps, HSLImag
 		const { pixels, width, height, adjustment, adjust } = this.props;
 		const { workerReady, processing } = this.state;
 
-		if (!pixels.length || !adjust || !workerReady || processing) return;
+		if (!adjust) {
+			this.ctx.clearRect(0, 0, width, height);
+			return;
+		}
+
+		if (!pixels.length || !workerReady || processing) return;
 
 		this.setState({
 			processing: true,
