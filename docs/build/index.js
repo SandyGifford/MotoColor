@@ -25521,6 +25521,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const layerInitiators = Object.freeze([
+    // { name: "Test Pattern", url: "assets/images/test_pattern.png" },
     { name: "Tank", url: "assets/images/tank.png" },
     { name: "Frame", url: "assets/images/frame.png" },
     { name: "Fender", url: "assets/images/fender.png" },
@@ -25549,7 +25550,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                     [name]: {
                         ...layers[name],
                         active: true,
-                        adjustment: newColor,
+                        adjustment: [newColor.h, newColor.s, newColor.l, newColor.a],
                     }
                 }
             });
@@ -25571,7 +25572,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                     [layerInitiator.name]: {
                         name: layerInitiator.name,
                         pixels: pixelData.pixels,
-                        adjustment: { h: 0, s: 1, l: 0.5, a: 1 },
+                        adjustment: [0, 255, 128, 255],
                         active: false,
                     },
                 },
@@ -25613,7 +25614,12 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("input", { className: "App__adjusters__adjuster__active", type: "checkbox", checked: layer.active, onChange: () => this.toggleActive(name) }),
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__adjusters__adjuster__label" }, name),
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__adjusters__adjuster__picker" },
-                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLColorPicker_HSLColorPicker__WEBPACK_IMPORTED_MODULE_2__["default"], { color: layer.adjustment, onChange: color => this.adjustmentChanged(name, color) })));
+                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLColorPicker_HSLColorPicker__WEBPACK_IMPORTED_MODULE_2__["default"], { color: {
+                                h: layer.adjustment[0],
+                                s: layer.adjustment[1],
+                                l: layer.adjustment[2],
+                                a: 1,
+                            }, onChange: color => this.adjustmentChanged(name, color) })));
             })),
             react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__layers" }, layerInitiators.map(layerInitiator => {
                 const { name, url } = layerInitiator;
@@ -25627,7 +25633,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         const { layers } = this.state;
         const url = Object.keys(layers).map(name => {
             const { adjustment, active } = layers[name];
-            const { h, s, l } = adjustment;
+            const [h, s, l] = adjustment;
             if (!active)
                 return null;
             return `${encodeURIComponent(name)}=${h},${s},${l}`;
@@ -25723,7 +25729,7 @@ class ColorSlider extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         const { value, color } = this.props;
         return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "ColorSlider", ref: this.barRef, style: { backgroundImage: this.getGradient() }, onClick: this.barClicked },
             react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "ColorSlider__thumb", onMouseDown: this.dragStart, style: {
-                    left: `${100 * _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__["default"].clamp(value, 0, 1)}%`,
+                    left: `${100 * _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__["default"].clamp(value, 0, 255) / 255}%`,
                     backgroundColor: _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__["default"].getCSSColor(color),
                 } })));
     }
@@ -25741,7 +25747,8 @@ class ColorSlider extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     setValueFromMousePosition(pos) {
         const left = this.barRef.current.offsetLeft;
         const width = this.barRef.current.offsetWidth;
-        this.props.onChange(_utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__["default"].clamp((pos - left) / width, 0, 1));
+        const val = 255 * _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__["default"].clamp((pos - left) / width, 0, 1);
+        this.props.onChange(val);
     }
     getGradient() {
         const { backdrop } = this.props;
@@ -25821,18 +25828,19 @@ class HSLColorPicker extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"]
     render() {
         const { color } = this.props;
         return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "HSLColorPicker" },
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ColorSlider_ColorSlider__WEBPACK_IMPORTED_MODULE_2__["default"], { value: color.h, color: { h: color.h, s: 1, l: 0.5, a: 1 }, onChange: this.changeH, backdrop: this.getHSLRainbow() }),
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ColorSlider_ColorSlider__WEBPACK_IMPORTED_MODULE_2__["default"], { value: color.s, color: { h: color.h, s: color.s, l: 0.5, a: 1 }, onChange: this.changeS, backdrop: [{ h: color.h, s: 0, l: 0.5, a: 1 }, { h: color.h, s: 1, l: 0.5, a: 1 }] }),
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ColorSlider_ColorSlider__WEBPACK_IMPORTED_MODULE_2__["default"], { value: color.l, color: { h: 0, s: 0, l: color.l, a: 1 }, onChange: this.changeL, backdrop: [{ h: 0, s: 0, l: 0, a: 1 }, { h: 0, s: 0, l: 1, a: 1 }] })));
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ColorSlider_ColorSlider__WEBPACK_IMPORTED_MODULE_2__["default"], { value: color.h, color: { h: color.h, s: 255, l: 128, a: 255 }, onChange: this.changeH, backdrop: this.getHSLRainbow() }),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ColorSlider_ColorSlider__WEBPACK_IMPORTED_MODULE_2__["default"], { value: color.s, color: { h: color.h, s: color.s, l: 128, a: 255 }, onChange: this.changeS, backdrop: [{ h: color.h, s: 0, l: 128, a: 255 }, { h: color.h, s: 255, l: 128, a: 255 }] }),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ColorSlider_ColorSlider__WEBPACK_IMPORTED_MODULE_2__["default"], { value: color.l, color: { h: 0, s: 0, l: color.l, a: 255 }, onChange: this.changeL, backdrop: [{ h: 0, s: 0, l: 0, a: 255 }, { h: 0, s: 0, l: 255, a: 255 }] })));
     }
     getHSLRainbow() {
         const colors = [];
-        for (let i = 0; i < 10; i++) {
+        const STEPS = 10;
+        for (let i = 0; i < STEPS; i++) {
             colors.push({
-                h: i / 10,
-                s: 1,
-                l: 0.5,
-                a: 1
+                h: 255 * i / STEPS,
+                s: 255,
+                l: 128,
+                a: 255
             });
         }
         return colors;
@@ -25888,6 +25896,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils/ColorUtils */ "./src/utils/ColorUtils.ts");
 /* harmony import */ var _workers_ImageAdjuster__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @workers/ImageAdjuster */ "./src/workers/ImageAdjuster.ts");
+/* harmony import */ var _utils_ImageUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/ImageUtils */ "./src/utils/ImageUtils.ts");
+
 
 
 
@@ -25909,22 +25919,21 @@ class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                 .then(adjustedPixels => {
                 const imageData = this.ctx.getImageData(0, 0, width, height);
                 const { data } = imageData;
-                for (let i = 0; i < adjustedPixels.length; i++) {
-                    const pixel = _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__["default"].hslToRGB(adjustedPixels[i]);
-                    const pixelIndex = i * 4;
-                    data[pixelIndex] = pixel.r;
-                    data[pixelIndex + 1] = pixel.g;
-                    data[pixelIndex + 2] = pixel.b;
-                    data[pixelIndex + 3] = typeof pixel.a === "number" ? pixel.a : 255;
-                }
+                _utils_ImageUtils__WEBPACK_IMPORTED_MODULE_4__["default"].forEachPixel(adjustedPixels, (hslPixel, pI, cI) => {
+                    const rgbPixel = _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__["default"].hslToRGB(hslPixel);
+                    data[cI] = rgbPixel[0];
+                    data[cI + 1] = rgbPixel[1];
+                    data[cI + 2] = rgbPixel[2];
+                    data[cI + 3] = typeof rgbPixel[3] === "number" ? rgbPixel[3] : 255;
+                });
                 this.ctx.putImageData(imageData, 0, 0);
                 this.setState({
                     processing: false,
                 }, () => {
                     const newAdjustment = this.props.adjustment;
-                    if (newAdjustment.h !== adjustment.h ||
-                        newAdjustment.s !== adjustment.s ||
-                        newAdjustment.l !== adjustment.l)
+                    if (newAdjustment[0] !== adjustment[0] ||
+                        newAdjustment[1] !== adjustment[1] ||
+                        newAdjustment[2] !== adjustment[2])
                         this.updateCanvas();
                 });
             });
@@ -25946,10 +25955,11 @@ class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         this.updateCanvas();
     }
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.adjustment.h !== prevProps.adjustment.h ||
-            this.props.adjustment.s !== prevProps.adjustment.s ||
-            this.props.adjustment.l !== prevProps.adjustment.l ||
-            (this.props.adjust && !prevProps.adjust))
+        const { adjustment, adjust } = this.props;
+        if (adjustment[0] !== prevProps.adjustment[0] ||
+            adjustment[1] !== prevProps.adjustment[1] ||
+            adjustment[2] !== prevProps.adjustment[2] ||
+            (adjust && !prevProps.adjust))
             this.updateCanvas();
     }
 }
@@ -25995,14 +26005,8 @@ __webpack_require__.r(__webpack_exports__);
 // based on https://gist.github.com/mjackson/5311256
 class ColorUtils {
     static getCSSColor(color) {
-        if (typeof color.h === "number") {
-            const { h, s, l, a } = color;
-            return `hsla(${h * 360}, ${s * 100}%, ${l * 100}%, ${a})`;
-        }
-        else {
-            const { r, g, b, a } = color;
-            return `rgba(${r * 255}, ${g * 255}, ${b * 255}, ${a})`;
-        }
+        const { h, s, l, a } = color;
+        return `hsla(${360 * h / 255}, ${100 * s / 255}%, ${100 * l / 255}%, ${a / 255})`;
     }
     /**
      * Converts an RGB color value to HSL. Conversion formula
@@ -26016,7 +26020,7 @@ class ColorUtils {
      * @return  Array           The HSL representation
      */
     static rgbToHSL(color) {
-        let { r, g, b, a } = color;
+        let [r, g, b, a] = color;
         r /= 255, g /= 255, b /= 255;
         const max = Math.max(r, g, b), min = Math.min(r, g, b);
         let h, s, l = (max + min) / 2;
@@ -26039,7 +26043,7 @@ class ColorUtils {
             }
             h /= 6;
         }
-        return { h, s, l, a };
+        return [h * 255, s * 255, l * 255, a];
     }
     /**
      * Converts an HSL color value to RGB. Conversion formula
@@ -26053,7 +26057,10 @@ class ColorUtils {
      * @return  Array           The RGB representation
      */
     static hslToRGB(color) {
-        let { h, s, l, a } = color;
+        let [h, s, l, a] = color;
+        h /= 255;
+        s /= 255;
+        l /= 255;
         let r, g, b;
         if (s === 0) {
             r = g = b = l; // achromatic
@@ -26065,12 +26072,7 @@ class ColorUtils {
             g = ColorUtils.hue2RGBComponent(p, q, h);
             b = ColorUtils.hue2RGBComponent(p, q, h - 1 / 3);
         }
-        return {
-            r: r * 255,
-            g: g * 255,
-            b: b * 255,
-            a,
-        };
+        return [r * 255, g * 255, b * 255, a];
     }
     static hue2RGBComponent(p, q, t) {
         if (t < 0)
@@ -26103,6 +26105,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ColorUtils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ColorUtils */ "./src/utils/ColorUtils.ts");
 
 class ImageUtils {
+    static forEachPixel(pixels, act) {
+        for (let i = 0; i < pixels.length; i += 4)
+            act([
+                pixels[i],
+                pixels[i + 1],
+                pixels[i + 2],
+                pixels[i + 3]
+            ], i / 4, i);
+    }
+    static mapPixels(pixels, act) {
+        const arr = [];
+        ImageUtils.forEachPixel(pixels, (pixel, pixelIndex, componentIndex) => arr.push(act(pixel, pixelIndex, componentIndex)));
+        return arr;
+    }
+    static mapPixelsToPixels(pixels, act) {
+        const arr = new Uint8ClampedArray(pixels.length);
+        ImageUtils.forEachPixel(pixels, (pixel, pI, cI) => {
+            const newPixel = act(pixel, pI, cI);
+            arr[cI] = newPixel[0];
+            arr[cI + 1] = newPixel[1];
+            arr[cI + 2] = newPixel[2];
+            arr[cI + 3] = newPixel[3];
+        });
+        return arr;
+    }
     static loadImage(url) {
         return new Promise((res, rej) => {
             const img = document.createElement("img");
@@ -26129,15 +26156,7 @@ class ImageUtils {
             const ctx = cvs.getContext("2d");
             const imageData = ctx.getImageData(0, 0, width, height);
             const { data } = imageData;
-            const pixels = [];
-            for (let i = 0; i < data.length; i += 4) {
-                pixels[i / 4] = {
-                    r: data[i],
-                    g: data[i + 1],
-                    b: data[i + 2],
-                    a: data[i + 3],
-                };
-            }
+            const pixels = new Uint8ClampedArray(data);
             return {
                 pixels,
                 width,
@@ -26148,8 +26167,9 @@ class ImageUtils {
     static loadImageIntoHSLPixelData(url) {
         return ImageUtils.loadImageIntoRGBPixelData(url)
             .then(pixelData => ({
-            ...pixelData,
-            pixels: pixelData.pixels.map(_ColorUtils__WEBPACK_IMPORTED_MODULE_0__["default"].rgbToHSL),
+            width: pixelData.width,
+            height: pixelData.height,
+            pixels: ImageUtils.mapPixelsToPixels(pixelData.pixels, _ColorUtils__WEBPACK_IMPORTED_MODULE_0__["default"].rgbToHSL),
         }));
     }
 }
@@ -26202,7 +26222,9 @@ class ImageAdjuster {
                     delete this.resolvers[message.id];
                     break;
                 case "pixelsAdjusted":
-                    resolver.res(message.data);
+                    this.transferablePixelBuffer = message.data;
+                    const uint8 = new Uint8ClampedArray(message.data);
+                    resolver.res(uint8);
                     delete this.resolvers[message.id];
                     break;
                 default:
@@ -26216,6 +26238,7 @@ class ImageAdjuster {
     }
     setBasePixels(basePixels) {
         const id = this.id++;
+        this.transferablePixelBuffer = new ArrayBuffer(basePixels.length);
         const message = {
             id,
             type: "setBasePixels",
@@ -26231,9 +26254,12 @@ class ImageAdjuster {
         const message = {
             id,
             type: "adjustImage",
-            data: adjustment,
+            data: {
+                adjustment,
+                transferBuffer: this.transferablePixelBuffer,
+            },
         };
-        this.worker.postMessage(message);
+        this.worker.postMessage(message, [this.transferablePixelBuffer]);
         return new Promise((res, rej) => {
             this.resolvers[id] = { res, rej };
         });

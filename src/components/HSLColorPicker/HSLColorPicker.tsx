@@ -25,19 +25,19 @@ export default class HSLColorPicker extends React.PureComponent<HSLColorPickerPr
 			<div className="HSLColorPicker">
 				<ColorSlider
 					value={color.h}
-					color={{ h: color.h, s: 1, l: 0.5, a: 1 }}
+					color={{ h: color.h, s: 255, l: 128, a: 255 }}
 					onChange={this.changeH}
 					backdrop={this.getHSLRainbow()} />
 				<ColorSlider
 					value={color.s}
-					color={{ h: color.h, s: color.s, l: 0.5, a: 1 }}
+					color={{ h: color.h, s: color.s, l: 128, a: 255 }}
 					onChange={this.changeS}
-					backdrop={[{ h: color.h, s: 0, l: 0.5, a: 1 }, { h: color.h, s: 1, l: 0.5, a: 1 }]} />
+					backdrop={[{ h: color.h, s: 0, l: 128, a: 255 }, { h: color.h, s: 255, l: 128, a: 255 }]} />
 				<ColorSlider
 					value={color.l}
-					color={{ h: 0, s: 0, l: color.l, a: 1 }}
+					color={{ h: 0, s: 0, l: color.l, a: 255 }}
 					onChange={this.changeL}
-					backdrop={[{ h: 0, s: 0, l: 0, a: 1 }, { h: 0, s: 0, l: 1, a: 1 }]} />
+					backdrop={[{ h: 0, s: 0, l: 0, a: 255 }, { h: 0, s: 0, l: 255, a: 255 }]} />
 			</div>
 		)
 	}
@@ -62,13 +62,14 @@ export default class HSLColorPicker extends React.PureComponent<HSLColorPickerPr
 
 	private getHSLRainbow(): HSLColor[] {
 		const colors: HSLColor[] = [];
+		const STEPS = 10;
 
-		for (let i = 0; i < 10; i++) {
+		for (let i = 0; i < STEPS; i++) {
 			colors.push({
-				h: i / 10,
-				s: 1,
-				l: 0.5,
-				a: 1
+				h: 255 * i / STEPS,
+				s: 255,
+				l: 128,
+				a: 255
 			})
 		}
 

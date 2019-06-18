@@ -1,13 +1,14 @@
 import "./HSLImage.style";
 
 import * as React from "react";
-import { HSLColor } from "@typings/color";
+import { ArrayColor } from "@typings/color";
 import ColorUtils from "@utils/ColorUtils";
 import { ImageAdjuster } from "@workers/ImageAdjuster";
+import ImageUtils from "@utils/ImageUtils";
 
 export interface HSLImageProps {
-	pixels: HSLColor[];
-	adjustment: HSLColor;
+	pixels: Uint8ClampedArray;
+	adjustment: ArrayColor;
 	adjust: boolean;
 	width: number;
 	height: number;
@@ -55,11 +56,13 @@ export default class HSLImage extends React.PureComponent<HSLImageProps, HSLImag
 	}
 
 	public componentDidUpdate(prevProps: HSLImageProps, prevState: HSLImageState) {
+		const { adjustment, adjust } = this.props;
+
 		if (
-			this.props.adjustment.h !== prevProps.adjustment.h ||
-			this.props.adjustment.s !== prevProps.adjustment.s ||
-			this.props.adjustment.l !== prevProps.adjustment.l ||
-			(this.props.adjust && !prevProps.adjust)
+			adjustment[0] !== prevProps.adjustment[0] ||
+			adjustment[1] !== prevProps.adjustment[1] ||
+			adjustment[2] !== prevProps.adjustment[2] ||
+			(adjust && !prevProps.adjust)
 		)
 			this.updateCanvas();
 	}
@@ -79,15 +82,14 @@ export default class HSLImage extends React.PureComponent<HSLImageProps, HSLImag
 				const imageData = this.ctx.getImageData(0, 0, width, height);
 				const { data } = imageData;
 
-				for (let i = 0; i < adjustedPixels.length; i++) {
-					const pixel = ColorUtils.hslToRGB(adjustedPixels[i]);
-					const pixelIndex = i * 4;
+				ImageUtils.forEachPixel(adjustedPixels, (hslPixel, pI, cI) => {
+					const rgbPixel = ColorUtils.hslToRGB(hslPixel);
 
-					data[pixelIndex] = pixel.r;
-					data[pixelIndex + 1] = pixel.g;
-					data[pixelIndex + 2] = pixel.b;
-					data[pixelIndex + 3] = typeof pixel.a === "number" ? pixel.a : 255;
-				}
+					data[cI] = rgbPixel[0];
+					data[cI + 1] = rgbPixel[1];
+					data[cI + 2] = rgbPixel[2];
+					data[cI + 3] = typeof rgbPixel[3] === "number" ? rgbPixel[3] : 255;
+				});
 
 				this.ctx.putImageData(imageData, 0, 0);
 
@@ -97,9 +99,9 @@ export default class HSLImage extends React.PureComponent<HSLImageProps, HSLImag
 					const newAdjustment = this.props.adjustment;
 
 					if (
-						newAdjustment.h !== adjustment.h ||
-						newAdjustment.s !== adjustment.s ||
-						newAdjustment.l !== adjustment.l
+						newAdjustment[0] !== adjustment[0] ||
+						newAdjustment[1] !== adjustment[1] ||
+						newAdjustment[2] !== adjustment[2]
 					)
 						this.updateCanvas();
 				});

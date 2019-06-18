@@ -1,31 +1,7 @@
-import { HSLColor } from "@typings/color";
-
-interface SetBasePixelsMessage {
-	id: number;
-	type: "setBasePixels";
-	data: HSLColor[];
-}
-
-interface AdjustImageMessage {
-	id: number;
-	type: "adjustImage";
-	data: HSLColor;
-}
-
-interface BasePixelsUpdatedMessage {
-	id: number;
-	type: "basePixelsUpdated";
-	data: HSLColor;
-}
-
-interface PixelsAdjustedMessage {
-	id: number;
-	type: "pixelsAdjusted";
-	data: HSLColor[];
-}
+import { PixelsAdjustedMessage, BasePixelsUpdatedMessage, SetBasePixelsMessage, AdjustImageMessage } from "./messages";
+import { ArrayColor } from "@typings/color";
 
 type IncomingMessage = PixelsAdjustedMessage | BasePixelsUpdatedMessage;
-// type OutgoingMessage = SetBasePixelsMessage | AdjustImageMessage;
 
 type PromiseResolution<T> = (value?: T | PromiseLike<T>) => void;
 type PromiseRejection = (reason?: any) => void;
@@ -36,24 +12,24 @@ interface PromiseResolvers<T> {
 }
 
 export class ImageAdjuster {
+	private transferablePixelBuffer: ArrayBuffer;
 	private id = 0;
 	private resolvers: { [id: number]: PromiseResolvers<any> } = {};
 	private readonly worker = new Worker("build/workers/imageAdjuster.js");
 
-	constructor(basePixels?: HSLColor[]) {
+	constructor(basePixels?: Uint8ClampedArray) {
 		this.worker.addEventListener("message", this.messageReceived);
-
 		if (basePixels) this.setBasePixels(basePixels);
 	}
 
-	public setBasePixels(basePixels: HSLColor[]): Promise<void> {
+	public setBasePixels(basePixels: Uint8ClampedArray): Promise<void> {
 		const id = this.id++;
 
+		this.transferablePixelBuffer = new ArrayBuffer(basePixels.length);
 		const message: SetBasePixelsMessage = {
 			id,
 			type: "setBasePixels",
 			data: basePixels,
-
 		};
 
 		this.worker.postMessage(message);
@@ -63,19 +39,20 @@ export class ImageAdjuster {
 		});
 	}
 
-	public adjustImage(adjustment: HSLColor): Promise<HSLColor[]> {
+	public adjustImage(adjustment: ArrayColor): Promise<Uint8ClampedArray> {
 		const id = this.id++;
-
 		const message: AdjustImageMessage = {
 			id,
 			type: "adjustImage",
-			data: adjustment,
-
+			data: {
+				adjustment,
+				transferBuffer: this.transferablePixelBuffer,
+			},
 		};
 
-		this.worker.postMessage(message);
+		this.worker.postMessage(message, [this.transferablePixelBuffer]);
 
-		return new Promise<HSLColor[]>((res, rej) => {
+		return new Promise((res, rej) => {
 			this.resolvers[id] = { res, rej };
 		});
 	}
@@ -92,7 +69,9 @@ export class ImageAdjuster {
 				delete this.resolvers[message.id];
 				break;
 			case "pixelsAdjusted":
-				resolver.res(message.data);
+				this.transferablePixelBuffer = message.data;
+				const uint8 = new Uint8ClampedArray(message.data);
+				resolver.res(uint8);
 				delete this.resolvers[message.id];
 				break;
 			default:

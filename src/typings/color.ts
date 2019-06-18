@@ -1,3 +1,5 @@
+export type ArrayColor = [number, number, number, number];
+
 export interface RGBColor {
 	r: number;
 	g: number;

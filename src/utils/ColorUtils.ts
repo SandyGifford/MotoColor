@@ -1,16 +1,11 @@
 // based on https://gist.github.com/mjackson/5311256
 
-import { RGBColor, HSLColor } from "@typings/color";
+import { HSLColor, ArrayColor } from "@typings/color";
 
 export default class ColorUtils {
-	public static getCSSColor(color: RGBColor | HSLColor): string {
-		if (typeof (color as HSLColor).h === "number") {
-			const { h, s, l, a } = color as HSLColor;
-			return `hsla(${h * 360}, ${s * 100}%, ${l * 100}%, ${a})`;
-		} else {
-			const { r, g, b, a } = color as RGBColor;
-			return `rgba(${r * 255}, ${g * 255}, ${b * 255}, ${a})`;
-		}
+	public static getCSSColor(color: HSLColor): string {
+		const { h, s, l, a } = color;
+		return `hsla(${360 * h / 255}, ${100 * s / 255}%, ${100 * l / 255}%, ${a / 255})`;
 	}
 
 	/**
@@ -24,8 +19,8 @@ export default class ColorUtils {
 	 * @param   Number  b       The blue color value
 	 * @return  Array           The HSL representation
 	 */
-	public static rgbToHSL(color: RGBColor): HSLColor {
-		let { r, g, b, a } = color;
+	public static rgbToHSL(color: ArrayColor): ArrayColor {
+		let [r, g, b, a] = color;
 
 		r /= 255, g /= 255, b /= 255;
 
@@ -47,7 +42,7 @@ export default class ColorUtils {
 			h /= 6;
 		}
 
-		return { h, s, l, a };
+		return [h * 255, s * 255, l * 255, a];
 	}
 
 	/**
@@ -61,8 +56,11 @@ export default class ColorUtils {
 	 * @param   Number  l       The lightness
 	 * @return  Array           The RGB representation
 	 */
-	public static hslToRGB(color: HSLColor): RGBColor {
-		let { h, s, l, a } = color;
+	public static hslToRGB(color: ArrayColor): ArrayColor {
+		let [h, s, l, a] = color;
+		h /= 255;
+		s /= 255;
+		l /= 255;
 		let r, g, b;
 
 		if (s === 0) {
@@ -77,12 +75,7 @@ export default class ColorUtils {
 			b = ColorUtils.hue2RGBComponent(p, q, h - 1 / 3);
 		}
 
-		return {
-			r: r * 255,
-			g: g * 255,
-			b: b * 255,
-			a,
-		};
+		return [r * 255, g * 255, b * 255, a];
 	}
 
 	private static hue2RGBComponent(p: number, q: number, t: number): number {

@@ -40,7 +40,7 @@ export default class ColorSlider extends React.PureComponent<ColorSliderProps, C
 					className="ColorSlider__thumb"
 					onMouseDown={this.dragStart}
 					style={{
-						left: `${100 * NumberUtils.clamp(value, 0, 1)}%`,
+						left: `${100 * NumberUtils.clamp(value, 0, 255) / 255}%`,
 						backgroundColor: ColorUtils.getCSSColor(color),
 					}} />
 			</div>
@@ -90,7 +90,9 @@ export default class ColorSlider extends React.PureComponent<ColorSliderProps, C
 		const left = this.barRef.current.offsetLeft;
 		const width = this.barRef.current.offsetWidth;
 
-		this.props.onChange(NumberUtils.clamp((pos - left) / width, 0, 1));
+		const val = 255 * NumberUtils.clamp((pos - left) / width, 0, 1);
+
+		this.props.onChange(val);
 	}
 
 	private getGradient(): string {

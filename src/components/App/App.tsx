@@ -2,7 +2,7 @@ import "./App.style";
 
 import * as React from "react";
 import HSLColorPicker from "@components/HSLColorPicker/HSLColorPicker";
-import { HSLColor } from "@typings/color";
+import { HSLColor, ArrayColor } from "@typings/color";
 import ImageUtils from "@utils/ImageUtils";
 import HSLImage from "@components/HSLImage/HSLImage";
 
@@ -14,8 +14,8 @@ interface LayerInitiator {
 
 interface HSLLayer {
 	name: string;
-	pixels: HSLColor[];
-	adjustment: HSLColor;
+	pixels: Uint8ClampedArray;
+	adjustment: ArrayColor;
 	active: boolean;
 }
 
@@ -28,6 +28,7 @@ export interface AppState {
 }
 
 const layerInitiators: LayerInitiator[] = Object.freeze([
+	// { name: "Test Pattern", url: "assets/images/test_pattern.png" },
 	{ name: "Tank", url: "assets/images/tank.png" },
 	{ name: "Frame", url: "assets/images/frame.png" },
 	{ name: "Fender", url: "assets/images/fender.png" },
@@ -57,7 +58,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 						[layerInitiator.name]: {
 							name: layerInitiator.name,
 							pixels: pixelData.pixels,
-							adjustment: { h: 0, s: 1, l: 0.5, a: 1 },
+							adjustment: [0, 255, 128, 255],
 							active: false,
 						},
 					},
@@ -113,7 +114,12 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 								<div className="App__adjusters__adjuster__label">{name}</div>
 								<div className="App__adjusters__adjuster__picker">
 									<HSLColorPicker
-										color={layer.adjustment}
+										color={{
+											h: layer.adjustment[0],
+											s: layer.adjustment[1],
+											l: layer.adjustment[2],
+											a: 1,
+										}}
 										onChange={color => this.adjustmentChanged(name, color)} />
 								</div>
 							</div>
@@ -168,7 +174,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 				[name]: {
 					...layers[name],
 					active: true,
-					adjustment: newColor,
+					adjustment: [newColor.h, newColor.s, newColor.l, newColor.a],
 				}
 			}
 		});
@@ -179,7 +185,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 
 		const url = Object.keys(layers).map(name => {
 			const { adjustment, active } = layers[name];
-			const { h, s, l } = adjustment;
+			const [h, s, l] = adjustment;
 
 			if (!active) return null;
 			return `${encodeURIComponent(name)}=${h},${s},${l}`;

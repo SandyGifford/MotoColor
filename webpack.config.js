@@ -2,8 +2,6 @@ const path = require("path");
 const tsconfig = require("./tsconfig");
 var glob = require("glob");
 
-console.log(glob.sync("./src/**/*.worker.ts"));
-
 const tsPaths = tsconfig.compilerOptions.paths;
 const tsPathKeys = Object.keys(tsPaths)
 
