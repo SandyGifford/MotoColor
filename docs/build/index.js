@@ -25515,6 +25515,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_HSLColorPicker_HSLColorPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/HSLColorPicker/HSLColorPicker */ "./src/components/HSLColorPicker/HSLColorPicker.tsx");
 /* harmony import */ var _utils_ImageUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/ImageUtils */ "./src/utils/ImageUtils.ts");
 /* harmony import */ var _components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @components/HSLImage/HSLImage */ "./src/components/HSLImage/HSLImage.tsx");
+/* harmony import */ var _utils_GeneralUtils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @utils/GeneralUtils */ "./src/utils/GeneralUtils.ts");
+
 
 
 
@@ -25555,6 +25557,19 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                 }
             });
         };
+        this.updateUrl = _utils_GeneralUtils__WEBPACK_IMPORTED_MODULE_5__["default"].debounce(() => {
+            const { layers } = this.state;
+            const url = Object.keys(layers).map(name => {
+                const { adjustment, active } = layers[name];
+                const [h, s, l] = adjustment;
+                if (!active)
+                    return null;
+                return `${encodeURIComponent(name)}=${Math.round(h)},${Math.round(s)},${Math.round(l)}`;
+            })
+                .filter(i => !!i)
+                .join("&");
+            window.history.replaceState({}, "", `?${url}`);
+        });
         this.state = {
             layers: {},
             ready: false,
@@ -25606,7 +25621,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     }
     componentDidUpdate() {
         if (this.state.ready)
-            this.updateURL();
+            this.updateUrl();
     }
     render() {
         const { layers, ready, fullWidth, fullHeight } = this.state;
@@ -25644,19 +25659,6 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                         } },
                         react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_4__["default"], { pixels: layer.pixels, adjustment: layer.adjustment, adjust: layer.active, width: layer.width, height: layer.height })));
             }).reverse())));
-    }
-    updateURL() {
-        const { layers } = this.state;
-        const url = Object.keys(layers).map(name => {
-            const { adjustment, active } = layers[name];
-            const [h, s, l] = adjustment;
-            if (!active)
-                return null;
-            return `${encodeURIComponent(name)}=${Math.round(h)},${Math.round(s)},${Math.round(l)}`;
-        })
-            .filter(i => !!i)
-            .join("&");
-        window.history.replaceState({}, "", `?${url}`);
     }
 }
 
@@ -26106,6 +26108,36 @@ class ColorUtils {
         if (t < 2 / 3)
             return p + (q - p) * (2 / 3 - t) * 6;
         return p;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/utils/GeneralUtils.ts":
+/*!***********************************!*\
+  !*** ./src/utils/GeneralUtils.ts ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GeneralUtils; });
+class GeneralUtils {
+    static debounce(func, wait = 1000) {
+        let timeout;
+        return function () {
+            return new Promise(res => {
+                const args = arguments;
+                const later = () => {
+                    timeout = null;
+                    res(func.apply(args));
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            });
+        };
     }
 }
 

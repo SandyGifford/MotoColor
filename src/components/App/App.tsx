@@ -5,6 +5,7 @@ import HSLColorPicker from "@components/HSLColorPicker/HSLColorPicker";
 import { HSLColor, ArrayColor } from "@typings/color";
 import ImageUtils from "@utils/ImageUtils";
 import HSLImage from "@components/HSLImage/HSLImage";
+import GeneralUtils from "@utils/GeneralUtils";
 
 interface LayerInitiator {
 	url: string;
@@ -102,7 +103,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 	}
 
 	public componentDidUpdate() {
-		if (this.state.ready) this.updateURL();
+		if (this.state.ready) this.updateUrl();
 	}
 
 	public render(): React.ReactNode {
@@ -209,7 +210,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 		});
 	};
 
-	private updateURL() {
+	private updateUrl = GeneralUtils.debounce(() => {
 		const { layers } = this.state;
 
 		const url = Object.keys(layers).map(name => {
@@ -223,5 +224,5 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 			.join("&");
 
 		window.history.replaceState({}, "", `?${url}`);
-	}
+	});
 }
