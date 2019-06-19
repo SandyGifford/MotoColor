@@ -95,7 +95,7 @@
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".App {\n  font-family: sans-serif;\n  display: flex;\n  user-select: none; }\n  .App__sidebar__adjuster {\n    display: flex; }\n    @media (min-width: 1000px) {\n      .App__sidebar__adjuster {\n        display: block; } }\n    .App__sidebar__adjuster__active {\n      flex: 0 0 auto; }\n      @media (min-width: 1000px) {\n        .App__sidebar__adjuster__active {\n          display: inline-block; } }\n    .App__sidebar__adjuster__label {\n      flex: 1 1 auto; }\n      @media (min-width: 1000px) {\n        .App__sidebar__adjuster__label {\n          display: inline-block; } }\n    .App__sidebar__adjuster__picker {\n      flex: 0 0 auto; }\n      @media (min-width: 1000px) {\n        .App__sidebar__adjuster__picker {\n          display: block; } }\n  .App__layers {\n    position: relative;\n    width: 100%; }\n    .App__layers__layer {\n      width: 100%;\n      height: 0;\n      position: absolute;\n      top: 0;\n      left: 0; }\n      .App__layers__layer__img {\n        position: absolute; }\n        .App__layers__layer__img--static {\n          width: 100%;\n          height: auto; }\n", ""]);
+exports.push([module.i, ".App {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  font-family: sans-serif;\n  color: white;\n  display: flex;\n  user-select: none; }\n  .App__sidebar {\n    background: #222; }\n    .App__sidebar__adjuster__header {\n      display: flex;\n      cursor: pointer; }\n      .App__sidebar__adjuster__header__active {\n        flex: 0 0 auto; }\n      .App__sidebar__adjuster__header__label {\n        flex: 1 1 auto;\n        padding-left: 1em; }\n      .App__sidebar__adjuster__header:hover {\n        background: #333; }\n      .App__sidebar__adjuster__header:active {\n        background: #111; }\n  .App__content {\n    position: relative;\n    width: 100%;\n    background: #333; }\n    .App__content__frame {\n      position: absolute;\n      top: 50%;\n      left: 1em;\n      right: 1em;\n      transform: translateY(-50%);\n      border: 2em solid black;\n      border-radius: 0.25em; }\n      .App__content__frame::after {\n        content: \"\";\n        position: absolute;\n        top: -0.5em;\n        left: -0.5em;\n        right: -0.5em;\n        bottom: -0.5em;\n        border: 0.5em solid white;\n        border-radius: 0.25em; }\n      .App__content__frame__layers {\n        width: 100%;\n        height: 0; }\n        .App__content__frame__layers__layer {\n          position: absolute;\n          top: 0;\n          left: 0;\n          right: 0;\n          bottom: 0; }\n          .App__content__frame__layers__layer__img {\n            position: absolute; }\n            .App__content__frame__layers__layer__img--static {\n              width: 100%;\n              height: auto; }\n", ""]);
 
 
 
@@ -110,7 +110,7 @@ exports.push([module.i, ".App {\n  font-family: sans-serif;\n  display: flex;\n 
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".ColorSlider {\n  position: relative;\n  min-width: 10em;\n  height: 1em;\n  margin: 1.25em 1.25em;\n  border-radius: 0.25em;\n  box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n  cursor: pointer; }\n  .ColorSlider__thumb {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 1em;\n    width: 1em;\n    margin-left: -0.5em;\n    box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n    cursor: pointer; }\n    .ColorSlider__thumb::after {\n      content: \"\";\n      position: absolute;\n      width: 100%;\n      height: 100%;\n      border: solid 0.5em #333;\n      top: -0.5em;\n      left: -0.5em;\n      border-radius: 0.5em; }\n", ""]);
+exports.push([module.i, ".ColorSlider {\n  position: relative;\n  min-width: 10em;\n  height: 1em;\n  margin: 1.25em 1.25em;\n  border-radius: 0.25em;\n  box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n  cursor: pointer; }\n  .ColorSlider__thumb {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 1em;\n    width: 1em;\n    margin-left: -0.5em;\n    box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n    cursor: pointer; }\n    .ColorSlider__thumb::after {\n      content: \"\";\n      position: absolute;\n      width: 100%;\n      height: 100%;\n      border: solid 0.5em #111;\n      box-shadow: 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n      top: -0.5em;\n      left: -0.5em;\n      border-radius: 0.5em; }\n", ""]);
 
 
 
@@ -25634,8 +25634,9 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                 if (layerInitiator.static)
                     return null;
                 return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: name, className: "App__sidebar__adjuster" },
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("input", { className: "App__sidebar__adjuster__active", id: `App__sidebar__adjuster__active ${name}`, type: "checkbox", checked: layer.active, onChange: () => this.toggleActive(name) }),
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("label", { className: "App__sidebar__adjuster__label", htmlFor: `App__sidebar__adjuster__active ${name}` }, name),
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: name, className: "App__sidebar__adjuster__header" },
+                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("input", { className: "App__sidebar__adjuster__header__active", id: `App__sidebar__adjuster__header__active ${name}`, type: "checkbox", checked: layer.active, onChange: () => this.toggleActive(name) }),
+                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("label", { className: "App__sidebar__adjuster__header__label", htmlFor: `App__sidebar__adjuster__header__active ${name}` }, name)),
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebar__adjuster__picker" },
                         react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLColorPicker_HSLColorPicker__WEBPACK_IMPORTED_MODULE_2__["default"], { color: {
                                 h: layer.adjustment[0],
@@ -25644,21 +25645,23 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                                 a: 255,
                             }, onChange: color => this.adjustmentChanged(name, color) })));
             })),
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__layers" }, layerInitiators.map(layerInitiator => {
-                const { name, url } = layerInitiator;
-                const layer = layers[name];
-                return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: name, className: "App__layers__layer", style: {
-                        paddingBottom: `${100 * fullHeight / fullWidth}%`,
-                    } }, layerInitiator.static ?
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("img", { className: "App__layers__layer__img App__layers__layer__img--static", src: url }) :
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__layers__layer__img", style: {
-                            top: `${100 * layer.y}%`,
-                            left: `${100 * layer.x}%`,
-                            width: `${100 * layer.width / fullWidth}%`,
-                            height: `${100 * layer.height / fullHeight}%`,
-                        } },
-                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_4__["default"], { pixels: layer.pixels, adjustment: layer.adjustment, adjust: layer.active, width: layer.width, height: layer.height })));
-            }).reverse())));
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__content" },
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__content__frame" },
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__content__frame__layers", style: {
+                            paddingBottom: `${100 * fullHeight / fullWidth}%`,
+                        } }, layerInitiators.map(layerInitiator => {
+                        const { name, url } = layerInitiator;
+                        const layer = layers[name];
+                        return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: name, className: "App__content__frame__layers__layer" }, layerInitiator.static ?
+                            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("img", { className: "App__content__frame__layers__layer__img App__content__frame__layers__layer__img--static", src: url }) :
+                            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__content__frame__layers__layer__img", style: {
+                                    top: `${100 * layer.y}%`,
+                                    left: `${100 * layer.x}%`,
+                                    width: `${100 * layer.width / fullWidth}%`,
+                                    height: `${100 * layer.height / fullHeight}%`,
+                                } },
+                                react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_4__["default"], { pixels: layer.pixels, adjustment: layer.adjustment, adjust: layer.active, width: layer.width, height: layer.height })));
+                    }).reverse())))));
     }
 }
 

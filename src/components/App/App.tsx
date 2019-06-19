@@ -122,13 +122,15 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 							if (layerInitiator.static) return null;
 
 							return <div key={name} className="App__sidebar__adjuster">
-								<input
-									className="App__sidebar__adjuster__active"
-									id={`App__sidebar__adjuster__active ${name}`}
-									type="checkbox"
-									checked={layer.active}
-									onChange={() => this.toggleActive(name)} />
-								<label className="App__sidebar__adjuster__label" htmlFor={`App__sidebar__adjuster__active ${name}`}>{name}</label>
+								<div key={name} className="App__sidebar__adjuster__header">
+									<input
+										className="App__sidebar__adjuster__header__active"
+										id={`App__sidebar__adjuster__header__active ${name}`}
+										type="checkbox"
+										checked={layer.active}
+										onChange={() => this.toggleActive(name)} />
+									<label className="App__sidebar__adjuster__header__label" htmlFor={`App__sidebar__adjuster__header__active ${name}`}>{name}</label>
+								</div>
 								<div className="App__sidebar__adjuster__picker">
 									<HSLColorPicker
 										color={{
@@ -143,40 +145,44 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 						})
 					}
 				</div>
-				<div className="App__layers">
-					{
-						layerInitiators.map(layerInitiator => {
-							const { name, url } = layerInitiator;
-							const layer = layers[name];
+				<div className="App__content">
+					<div className="App__content__frame">
+						<div className="App__content__frame__layers"
+							style={{
+								paddingBottom: `${100 * fullHeight / fullWidth}%`,
+							}}>
+							{
+								layerInitiators.map(layerInitiator => {
+									const { name, url } = layerInitiator;
+									const layer = layers[name];
 
-							return <div
-								key={name}
-								className="App__layers__layer"
-								style={{
-									paddingBottom: `${100 * fullHeight / fullWidth}%`,
-								}}>
-								{
-									layerInitiator.static ?
-										<img className="App__layers__layer__img App__layers__layer__img--static" src={url} /> :
-										<div
-											className="App__layers__layer__img"
-											style={{
-												top: `${100 * layer.y}%`,
-												left: `${100 * layer.x}%`,
-												width: `${100 * layer.width / fullWidth}%`,
-												height: `${100 * layer.height / fullHeight}%`,
-											}}>
-											<HSLImage
-												pixels={layer.pixels}
-												adjustment={layer.adjustment}
-												adjust={layer.active}
-												width={layer.width}
-												height={layer.height} />
-										</div>
-								}
-							</div>
-						}).reverse()
-					}
+									return <div
+										key={name}
+										className="App__content__frame__layers__layer">
+										{
+											layerInitiator.static ?
+												<img className="App__content__frame__layers__layer__img App__content__frame__layers__layer__img--static" src={url} /> :
+												<div
+													className="App__content__frame__layers__layer__img"
+													style={{
+														top: `${100 * layer.y}%`,
+														left: `${100 * layer.x}%`,
+														width: `${100 * layer.width / fullWidth}%`,
+														height: `${100 * layer.height / fullHeight}%`,
+													}}>
+													<HSLImage
+														pixels={layer.pixels}
+														adjustment={layer.adjustment}
+														adjust={layer.active}
+														width={layer.width}
+														height={layer.height} />
+												</div>
+										}
+									</div>
+								}).reverse()
+							}
+						</div>
+					</div>
 				</div>
 			</div>
 		)
