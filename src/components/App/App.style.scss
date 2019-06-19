@@ -11,6 +11,7 @@
 
 	&__sidebar {
 		background: #222;
+		overflow-y: auto;
 
 		&__adjuster {
 			&__picker {}
