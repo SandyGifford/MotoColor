@@ -25717,7 +25717,7 @@ class ColorSlider extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     constructor(props) {
         super(props);
         this.barRef = react__WEBPACK_IMPORTED_MODULE_1__["createRef"]();
-        this.barClicked = e => {
+        this.barMouseDown = e => {
             if (e.target !== e.currentTarget)
                 return;
             this.setValueFromMousePosition(e.clientX);
@@ -25743,7 +25743,7 @@ class ColorSlider extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     }
     render() {
         const { value, color } = this.props;
-        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "ColorSlider", ref: this.barRef, style: { backgroundImage: this.getGradient() }, onClick: this.barClicked },
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "ColorSlider", ref: this.barRef, style: { backgroundImage: this.getGradient() }, onMouseDown: this.barMouseDown },
             react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "ColorSlider__thumb", onMouseDown: this.dragStart, style: {
                     left: `${100 * _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__["default"].clamp(value, 0, 255) / 255}%`,
                     backgroundColor: _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__["default"].getCSSColor(color),

@@ -35,7 +35,7 @@ export default class ColorSlider extends React.PureComponent<ColorSliderProps, C
 				className="ColorSlider"
 				ref={this.barRef}
 				style={{ backgroundImage: this.getGradient() }}
-				onClick={this.barClicked}>
+				onMouseDown={this.barMouseDown}>
 				<div
 					className="ColorSlider__thumb"
 					onMouseDown={this.dragStart}
@@ -51,7 +51,7 @@ export default class ColorSlider extends React.PureComponent<ColorSliderProps, C
 		this.removeragListeners();
 	}
 
-	private barClicked: React.MouseEventHandler<HTMLDivElement> = e => {
+	private barMouseDown: React.MouseEventHandler<HTMLDivElement> = e => {
 		if (e.target !== e.currentTarget) return;
 		this.setValueFromMousePosition(e.clientX);
 	};
