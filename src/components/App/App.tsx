@@ -135,7 +135,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 											h: layer.adjustment[0],
 											s: layer.adjustment[1],
 											l: layer.adjustment[2],
-											a: 1,
+											a: 255,
 										}}
 										onChange={color => this.adjustmentChanged(name, color)} />
 								</div>
