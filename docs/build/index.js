@@ -25656,7 +25656,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         })
             .filter(i => !!i)
             .join("&");
-        window.history.pushState({}, "", `?${url}`);
+        window.history.replaceState({}, "", `?${url}`);
     }
 }
 

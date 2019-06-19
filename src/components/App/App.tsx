@@ -222,6 +222,6 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 			.filter(i => !!i)
 			.join("&");
 
-		window.history.pushState({}, "", `?${url}`);
+		window.history.replaceState({}, "", `?${url}`);
 	}
 }
