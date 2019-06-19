@@ -95,7 +95,7 @@
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".App {\n  font-family: sans-serif;\n  display: flex;\n  user-select: none; }\n  .App__adjusters__adjuster {\n    display: flex; }\n    @media (min-width: 1000px) {\n      .App__adjusters__adjuster {\n        display: block; } }\n    .App__adjusters__adjuster__active {\n      flex: 0 0 auto; }\n      @media (min-width: 1000px) {\n        .App__adjusters__adjuster__active {\n          display: inline-block; } }\n    .App__adjusters__adjuster__label {\n      flex: 1 1 auto; }\n      @media (min-width: 1000px) {\n        .App__adjusters__adjuster__label {\n          display: inline-block; } }\n    .App__adjusters__adjuster__picker {\n      flex: 0 0 auto; }\n      @media (min-width: 1000px) {\n        .App__adjusters__adjuster__picker {\n          display: block; } }\n  .App__layers {\n    position: relative;\n    width: 100%; }\n    .App__layers__layer {\n      width: 100%;\n      height: 0;\n      position: absolute;\n      top: 0;\n      left: 0; }\n      .App__layers__layer__img {\n        position: absolute; }\n        .App__layers__layer__img--static {\n          width: 100%;\n          height: auto; }\n", ""]);
+exports.push([module.i, ".App {\n  font-family: sans-serif;\n  display: flex;\n  user-select: none; }\n  .App__sidebar__adjuster {\n    display: flex; }\n    @media (min-width: 1000px) {\n      .App__sidebar__adjuster {\n        display: block; } }\n    .App__sidebar__adjuster__active {\n      flex: 0 0 auto; }\n      @media (min-width: 1000px) {\n        .App__sidebar__adjuster__active {\n          display: inline-block; } }\n    .App__sidebar__adjuster__label {\n      flex: 1 1 auto; }\n      @media (min-width: 1000px) {\n        .App__sidebar__adjuster__label {\n          display: inline-block; } }\n    .App__sidebar__adjuster__picker {\n      flex: 0 0 auto; }\n      @media (min-width: 1000px) {\n        .App__sidebar__adjuster__picker {\n          display: block; } }\n  .App__layers {\n    position: relative;\n    width: 100%; }\n    .App__layers__layer {\n      width: 100%;\n      height: 0;\n      position: absolute;\n      top: 0;\n      left: 0; }\n      .App__layers__layer__img {\n        position: absolute; }\n        .App__layers__layer__img--static {\n          width: 100%;\n          height: auto; }\n", ""]);
 
 
 
@@ -25591,10 +25591,10 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                 const [name, color] = item.split("=");
                 const [h, s, l] = color.split(",");
                 this.adjustmentChanged(name, {
-                    h: parseFloat(h),
-                    s: parseFloat(s),
-                    l: parseFloat(l),
-                    a: 1
+                    h: parseInt(h),
+                    s: parseInt(s),
+                    l: parseInt(l),
+                    a: 255
                 });
             });
             this.setState({
@@ -25613,15 +25613,15 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         if (!ready)
             return null;
         return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App" },
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__adjusters" }, layerInitiators.map(layerInitiator => {
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebar" }, layerInitiators.map(layerInitiator => {
                 const { name } = layerInitiator;
                 const layer = layers[name];
                 if (layerInitiator.static)
                     return null;
-                return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: name, className: "App__adjusters__adjuster" },
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("input", { className: "App__adjusters__adjuster__active", type: "checkbox", checked: layer.active, onChange: () => this.toggleActive(name) }),
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__adjusters__adjuster__label" }, name),
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__adjusters__adjuster__picker" },
+                return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: name, className: "App__sidebar__adjuster" },
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("input", { className: "App__sidebar__adjuster__active", type: "checkbox", checked: layer.active, onChange: () => this.toggleActive(name) }),
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebar__adjuster__label" }, name),
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebar__adjuster__picker" },
                         react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLColorPicker_HSLColorPicker__WEBPACK_IMPORTED_MODULE_2__["default"], { color: {
                                 h: layer.adjustment[0],
                                 s: layer.adjustment[1],
@@ -25652,7 +25652,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
             const [h, s, l] = adjustment;
             if (!active)
                 return null;
-            return `${encodeURIComponent(name)}=${h},${s},${l}`;
+            return `${encodeURIComponent(name)}=${Math.round(h)},${Math.round(s)},${Math.round(l)}`;
         })
             .filter(i => !!i)
             .join("&");

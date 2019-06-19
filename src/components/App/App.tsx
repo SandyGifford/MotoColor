@@ -27,7 +27,7 @@ interface HSLLayer {
 
 export interface AppProps { }
 export interface AppState {
-	layers: { [urls: string]: HSLLayer };
+	layers: { [name: string]: HSLLayer };
 	ready: boolean;
 	fullWidth: number;
 	fullHeight: number;
@@ -86,10 +86,10 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 						const [h, s, l] = color.split(",");
 
 						this.adjustmentChanged(name, {
-							h: parseFloat(h),
-							s: parseFloat(s),
-							l: parseFloat(l),
-							a: 1
+							h: parseInt(h),
+							s: parseInt(s),
+							l: parseInt(l),
+							a: 255
 						})
 					});
 
@@ -112,7 +112,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 
 		return (
 			<div className="App">
-				<div className="App__adjusters">
+				<div className="App__sidebar">
 					{
 						layerInitiators.map(layerInitiator => {
 							const { name } = layerInitiator;
@@ -120,14 +120,14 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 
 							if (layerInitiator.static) return null;
 
-							return <div key={name} className="App__adjusters__adjuster">
+							return <div key={name} className="App__sidebar__adjuster">
 								<input
-									className="App__adjusters__adjuster__active"
+									className="App__sidebar__adjuster__active"
 									type="checkbox"
 									checked={layer.active}
 									onChange={() => this.toggleActive(name)} />
-								<div className="App__adjusters__adjuster__label">{name}</div>
-								<div className="App__adjusters__adjuster__picker">
+								<div className="App__sidebar__adjuster__label">{name}</div>
+								<div className="App__sidebar__adjuster__picker">
 									<HSLColorPicker
 										color={{
 											h: layer.adjustment[0],
@@ -217,7 +217,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 			const [h, s, l] = adjustment;
 
 			if (!active) return null;
-			return `${encodeURIComponent(name)}=${h},${s},${l}`;
+			return `${encodeURIComponent(name)}=${Math.round(h)},${Math.round(s)},${Math.round(l)}`;
 		})
 			.filter(i => !!i)
 			.join("&");
