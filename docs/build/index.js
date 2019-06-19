@@ -95,7 +95,22 @@
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".App {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  font-family: sans-serif;\n  color: white;\n  display: flex;\n  user-select: none; }\n  .App__sidebar {\n    background: #222; }\n    .App__sidebar__adjuster__header {\n      display: flex;\n      cursor: pointer; }\n      .App__sidebar__adjuster__header__active {\n        flex: 0 0 auto; }\n      .App__sidebar__adjuster__header__label {\n        flex: 1 1 auto;\n        padding-left: 1em; }\n      .App__sidebar__adjuster__header:hover {\n        background: #333; }\n      .App__sidebar__adjuster__header:active {\n        background: #111; }\n  .App__content {\n    position: relative;\n    width: 100%;\n    background: #333; }\n    .App__content__frame {\n      position: absolute;\n      top: 50%;\n      left: 1em;\n      right: 1em;\n      transform: translateY(-50%);\n      border: 2em solid black;\n      border-radius: 0.25em; }\n      .App__content__frame::after {\n        content: \"\";\n        position: absolute;\n        top: -0.5em;\n        left: -0.5em;\n        right: -0.5em;\n        bottom: -0.5em;\n        border: 0.5em solid white;\n        border-radius: 0.25em; }\n      .App__content__frame__layers {\n        width: 100%;\n        height: 0; }\n        .App__content__frame__layers__layer {\n          position: absolute;\n          top: 0;\n          left: 0;\n          right: 0;\n          bottom: 0; }\n          .App__content__frame__layers__layer__img {\n            position: absolute; }\n            .App__content__frame__layers__layer__img--static {\n              width: 100%;\n              height: auto; }\n", ""]);
+exports.push([module.i, ".App {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  font-family: sans-serif;\n  color: white;\n  display: flex;\n  user-select: none; }\n  .App__sidebar {\n    background: #222; }\n  .App__content {\n    position: relative;\n    width: 100%;\n    background: #333; }\n    .App__content__frame {\n      position: absolute;\n      top: 50%;\n      left: 1em;\n      right: 1em;\n      transform: translateY(-50%);\n      border: 2em solid black;\n      border-radius: 0.25em; }\n      .App__content__frame::after {\n        content: \"\";\n        position: absolute;\n        top: -0.5em;\n        left: -0.5em;\n        right: -0.5em;\n        bottom: -0.5em;\n        border: 0.5em solid white;\n        border-radius: 0.25em; }\n      .App__content__frame__layers {\n        width: 100%;\n        height: 0; }\n        .App__content__frame__layers__layer {\n          position: absolute;\n          top: 0;\n          left: 0;\n          right: 0;\n          bottom: 0; }\n          .App__content__frame__layers__layer__img {\n            position: absolute; }\n            .App__content__frame__layers__layer__img--static {\n              width: 100%;\n              height: auto; }\n", ""]);
+
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/Checkbox/Checkbox.style.scss":
+/*!************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/Checkbox/Checkbox.style.scss ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+// Module
+exports.push([module.i, "@charset \"UTF-8\";\n.Checkbox {\n  display: flex;\n  padding: 0.25em 0.5em; }\n  .Checkbox__input {\n    position: relative;\n    height: 1.3em;\n    width: 1.3em;\n    flex: 0 0 auto;\n    visibility: hidden;\n    cursor: pointer; }\n    .Checkbox__input::before {\n      content: \"\";\n      position: absolute;\n      visibility: visible;\n      top: 0;\n      left: 0;\n      right: 0;\n      bottom: 0;\n      background: #666;\n      border-radius: 0.25em; }\n    .Checkbox__input:checked::after {\n      content: \"✔\";\n      color: white;\n      position: absolute;\n      visibility: visible;\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%); }\n  .Checkbox__label {\n    flex: 1 1 auto;\n    padding-left: 1em;\n    font-weight: bold;\n    cursor: pointer; }\n", ""]);
 
 
 
@@ -25516,6 +25531,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_ImageUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/ImageUtils */ "./src/utils/ImageUtils.ts");
 /* harmony import */ var _components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @components/HSLImage/HSLImage */ "./src/components/HSLImage/HSLImage.tsx");
 /* harmony import */ var _utils_GeneralUtils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @utils/GeneralUtils */ "./src/utils/GeneralUtils.ts");
+/* harmony import */ var _components_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @components/Checkbox/Checkbox */ "./src/components/Checkbox/Checkbox.tsx");
+
 
 
 
@@ -25532,14 +25549,14 @@ const layerInitiators = Object.freeze([
 class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     constructor(props) {
         super(props);
-        this.toggleActive = (name) => {
+        this.changeActive = (name, active) => {
             let { layers } = this.state;
             this.setState({
                 layers: {
                     ...layers,
                     [name]: {
                         ...layers[name],
-                        active: !layers[name].active,
+                        active: active,
                     }
                 }
             });
@@ -25634,9 +25651,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                 if (layerInitiator.static)
                     return null;
                 return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: name, className: "App__sidebar__adjuster" },
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: name, className: "App__sidebar__adjuster__header" },
-                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("input", { className: "App__sidebar__adjuster__header__active", id: `App__sidebar__adjuster__header__active ${name}`, type: "checkbox", checked: layer.active, onChange: () => this.toggleActive(name) }),
-                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("label", { className: "App__sidebar__adjuster__header__label", htmlFor: `App__sidebar__adjuster__header__active ${name}` }, name)),
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_6__["default"], { label: name, checked: layer.active, onChange: active => this.changeActive(name, active) }),
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebar__adjuster__picker" },
                         react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLColorPicker_HSLColorPicker__WEBPACK_IMPORTED_MODULE_2__["default"], { color: {
                                 h: layer.adjustment[0],
@@ -25664,6 +25679,73 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                     }).reverse())))));
     }
 }
+
+
+/***/ }),
+
+/***/ "./src/components/Checkbox/Checkbox.style.scss":
+/*!*****************************************************!*\
+  !*** ./src/components/Checkbox/Checkbox.style.scss ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./Checkbox.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/Checkbox/Checkbox.style.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/components/Checkbox/Checkbox.tsx":
+/*!**********************************************!*\
+  !*** ./src/components/Checkbox/Checkbox.tsx ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Checkbox; });
+/* harmony import */ var _Checkbox_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Checkbox.style */ "./src/components/Checkbox/Checkbox.style.scss");
+/* harmony import */ var _Checkbox_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Checkbox_style__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+class Checkbox extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
+    constructor(props) {
+        super(props);
+        this.ID = Checkbox.lastId++;
+        this.toggle = () => {
+            this.props.onChange(!this.props.checked);
+        };
+        this.state = {};
+    }
+    render() {
+        const { checked, label } = this.props;
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "Checkbox" },
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("input", { className: "Checkbox__input", id: `Checkbox ${this.ID}`, type: "checkbox", checked: checked, onChange: this.toggle }),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("label", { className: "Checkbox__label", htmlFor: `Checkbox ${this.ID}` }, label)));
+    }
+}
+Checkbox.lastId = 0;
 
 
 /***/ }),

@@ -6,6 +6,7 @@ import { HSLColor, ArrayColor } from "@typings/color";
 import ImageUtils from "@utils/ImageUtils";
 import HSLImage from "@components/HSLImage/HSLImage";
 import GeneralUtils from "@utils/GeneralUtils";
+import Checkbox from "@components/Checkbox/Checkbox";
 
 interface LayerInitiator {
 	url: string;
@@ -122,15 +123,10 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 							if (layerInitiator.static) return null;
 
 							return <div key={name} className="App__sidebar__adjuster">
-								<div key={name} className="App__sidebar__adjuster__header">
-									<input
-										className="App__sidebar__adjuster__header__active"
-										id={`App__sidebar__adjuster__header__active ${name}`}
-										type="checkbox"
-										checked={layer.active}
-										onChange={() => this.toggleActive(name)} />
-									<label className="App__sidebar__adjuster__header__label" htmlFor={`App__sidebar__adjuster__header__active ${name}`}>{name}</label>
-								</div>
+								<Checkbox
+									label={name}
+									checked={layer.active}
+									onChange={active => this.changeActive(name, active)} />
 								<div className="App__sidebar__adjuster__picker">
 									<HSLColorPicker
 										color={{
@@ -188,7 +184,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 		)
 	}
 
-	private toggleActive = (name: string) => {
+	private changeActive = (name: string, active: boolean) => {
 		let { layers } = this.state;
 
 		this.setState({
@@ -196,7 +192,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 				...layers,
 				[name]: {
 					...layers[name],
-					active: !layers[name].active,
+					active: active,
 				}
 			}
 		});
