@@ -25634,8 +25634,8 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                 if (layerInitiator.static)
                     return null;
                 return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: name, className: "App__sidebar__adjuster" },
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("input", { className: "App__sidebar__adjuster__active", type: "checkbox", checked: layer.active, onChange: () => this.toggleActive(name) }),
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebar__adjuster__label" }, name),
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("input", { className: "App__sidebar__adjuster__active", id: `App__sidebar__adjuster__active ${name}`, type: "checkbox", checked: layer.active, onChange: () => this.toggleActive(name) }),
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("label", { className: "App__sidebar__adjuster__label", htmlFor: `App__sidebar__adjuster__active ${name}` }, name),
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebar__adjuster__picker" },
                         react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLColorPicker_HSLColorPicker__WEBPACK_IMPORTED_MODULE_2__["default"], { color: {
                                 h: layer.adjustment[0],

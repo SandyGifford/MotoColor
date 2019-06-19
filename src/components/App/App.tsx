@@ -124,10 +124,11 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 							return <div key={name} className="App__sidebar__adjuster">
 								<input
 									className="App__sidebar__adjuster__active"
+									id={`App__sidebar__adjuster__active ${name}`}
 									type="checkbox"
 									checked={layer.active}
 									onChange={() => this.toggleActive(name)} />
-								<div className="App__sidebar__adjuster__label">{name}</div>
+								<label className="App__sidebar__adjuster__label" htmlFor={`App__sidebar__adjuster__active ${name}`}>{name}</label>
 								<div className="App__sidebar__adjuster__picker">
 									<HSLColorPicker
 										color={{
