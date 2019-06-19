@@ -56,20 +56,21 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 	public componentDidMount() {
 		Promise.all(layerInitiators.map(layerInitiator => ImageUtils.loadImageIntoHSLPixelData(layerInitiator.url)
 			.then(pixelData => {
+				const { name, x, y } = layerInitiator;
 				const { layers } = this.state;
 
 				this.setState({
 					layers: {
 						...layers,
 						[layerInitiator.name]: {
-							name: layerInitiator.name,
+							name: name,
 							pixels: pixelData.pixels,
 							adjustment: [0, 255, 128, 255],
 							active: false,
 							width: pixelData.width,
 							height: pixelData.height,
-							x: layerInitiator.x || 0,
-							y: layerInitiator.y || 0,
+							x: x || 0,
+							y: y || 0,
 						},
 					},
 				});
