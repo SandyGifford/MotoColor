@@ -38,8 +38,10 @@
 
 	&__label {
 		flex: 1 1 auto;
+		color: #666;
 		padding-left: 1em;
 		font-weight: bold;
 		cursor: pointer;
+		text-shadow: -0.05em -0.05em 0.1em #666, 0.05em 0.05em 0.1em white;
 	}
 }

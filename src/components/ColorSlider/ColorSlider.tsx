@@ -41,8 +41,13 @@ export default class ColorSlider extends React.PureComponent<ColorSliderProps, C
 					onMouseDown={this.dragStart}
 					style={{
 						left: `${100 * NumberUtils.clamp(value, 0, 255) / 255}%`,
-						backgroundColor: ColorUtils.getCSSColor(color),
-					}} />
+					}}>
+					<div
+						className="ColorSlider__thumb__color"
+						style={{
+							backgroundColor: ColorUtils.getCSSColor(color),
+						}} />
+				</div>
 			</div>
 		)
 	}

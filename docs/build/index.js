@@ -95,7 +95,7 @@
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".App {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  font-family: sans-serif;\n  color: white;\n  display: flex;\n  user-select: none; }\n  .App__sidebar {\n    background: #222;\n    overflow-y: auto; }\n  .App__content {\n    position: relative;\n    width: 100%;\n    background: #333; }\n    .App__content__frame {\n      position: absolute;\n      top: 50%;\n      left: 1em;\n      right: 1em;\n      transform: translateY(-50%);\n      border: 2em solid black;\n      border-radius: 0.25em; }\n      .App__content__frame::after {\n        content: \"\";\n        position: absolute;\n        top: -0.5em;\n        left: -0.5em;\n        right: -0.5em;\n        bottom: -0.5em;\n        border: 0.5em solid white;\n        border-radius: 0.25em; }\n      .App__content__frame__layers {\n        width: 100%;\n        height: 0; }\n        .App__content__frame__layers__layer {\n          position: absolute;\n          top: 0;\n          left: 0;\n          right: 0;\n          bottom: 0; }\n          .App__content__frame__layers__layer__img {\n            position: absolute; }\n            .App__content__frame__layers__layer__img--static {\n              width: 100%;\n              height: auto; }\n", ""]);
+exports.push([module.i, ".App {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  font-family: sans-serif;\n  color: white;\n  display: flex;\n  user-select: none; }\n  .App__sidebar {\n    background: #DDDDDE;\n    flex: 0 0 auto;\n    overflow-y: auto;\n    border-right: 0.1em outset; }\n  .App__content {\n    position: relative;\n    width: 100%;\n    background: #333;\n    flex: 1 1 auto; }\n    .App__content__frame {\n      position: absolute;\n      top: 50%;\n      left: 1em;\n      right: 1em;\n      transform: translateY(-50%);\n      border: 2em solid black;\n      border-radius: 0.25em; }\n      .App__content__frame::after {\n        content: \"\";\n        position: absolute;\n        top: -0.5em;\n        left: -0.5em;\n        right: -0.5em;\n        bottom: -0.5em;\n        border: 0.5em solid white;\n        border-radius: 0.25em; }\n      .App__content__frame__layers {\n        width: 100%;\n        height: 0; }\n        .App__content__frame__layers__layer {\n          position: absolute;\n          top: 0;\n          left: 0;\n          right: 0;\n          bottom: 0; }\n          .App__content__frame__layers__layer__img {\n            position: absolute; }\n            .App__content__frame__layers__layer__img--static {\n              width: 100%;\n              height: auto; }\n", ""]);
 
 
 
@@ -110,7 +110,7 @@ exports.push([module.i, ".App {\n  position: fixed;\n  top: 0;\n  left: 0;\n  ri
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\n.Checkbox {\n  display: flex;\n  padding: 0.25em 0.5em; }\n  .Checkbox__input {\n    position: relative;\n    height: 1.3em;\n    width: 1.3em;\n    flex: 0 0 auto;\n    visibility: hidden;\n    cursor: pointer; }\n    .Checkbox__input::before {\n      content: \"\";\n      position: absolute;\n      visibility: visible;\n      top: 0;\n      left: 0;\n      right: 0;\n      bottom: 0;\n      background: #666;\n      border-radius: 0.25em; }\n    .Checkbox__input:checked::after {\n      content: \"✔\";\n      color: white;\n      position: absolute;\n      visibility: visible;\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%); }\n  .Checkbox__label {\n    flex: 1 1 auto;\n    padding-left: 1em;\n    font-weight: bold;\n    cursor: pointer; }\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n.Checkbox {\n  display: flex;\n  padding: 0.25em 0.5em; }\n  .Checkbox__input {\n    position: relative;\n    height: 1.3em;\n    width: 1.3em;\n    flex: 0 0 auto;\n    visibility: hidden;\n    cursor: pointer; }\n    .Checkbox__input::before {\n      content: \"\";\n      position: absolute;\n      visibility: visible;\n      top: 0;\n      left: 0;\n      right: 0;\n      bottom: 0;\n      background: #666;\n      border-radius: 0.25em; }\n    .Checkbox__input:checked::after {\n      content: \"✔\";\n      color: white;\n      position: absolute;\n      visibility: visible;\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%); }\n  .Checkbox__label {\n    flex: 1 1 auto;\n    color: #666;\n    padding-left: 1em;\n    font-weight: bold;\n    cursor: pointer;\n    text-shadow: -0.05em -0.05em 0.1em #666, 0.05em 0.05em 0.1em white; }\n", ""]);
 
 
 
@@ -125,7 +125,7 @@ exports.push([module.i, "@charset \"UTF-8\";\n.Checkbox {\n  display: flex;\n  p
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".ColorSlider {\n  position: relative;\n  min-width: 10em;\n  height: 1em;\n  margin: 1.25em 1.25em;\n  border-radius: 0.25em;\n  box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n  cursor: pointer; }\n  .ColorSlider__thumb {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 1em;\n    width: 1em;\n    margin-left: -0.5em;\n    box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n    cursor: pointer; }\n    .ColorSlider__thumb::after {\n      content: \"\";\n      position: absolute;\n      width: 100%;\n      height: 100%;\n      border: solid 0.5em #111;\n      box-shadow: 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n      top: -0.5em;\n      left: -0.5em;\n      border-radius: 0.5em; }\n", ""]);
+exports.push([module.i, ".ColorSlider {\n  position: relative;\n  min-width: 10em;\n  height: 1em;\n  margin: 1.25em 1.25em;\n  border-radius: 0.5em;\n  box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n  cursor: pointer;\n  border: 0.1em inset; }\n  .ColorSlider__thumb {\n    position: absolute;\n    top: 50%;\n    left: 0;\n    height: 1.5em;\n    width: 1.5em;\n    transform: translate(-50%, -50%);\n    box-shadow: 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n    background-color: #EEE;\n    border: 0.05em outset;\n    border-radius: 50%;\n    cursor: pointer; }\n    .ColorSlider__thumb__color {\n      position: absolute;\n      height: 1em;\n      width: 1em;\n      box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%);\n      border-radius: 50%; }\n", ""]);
 
 
 
@@ -25833,8 +25833,10 @@ class ColorSlider extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "ColorSlider", ref: this.barRef, style: { backgroundImage: this.getGradient() }, onMouseDown: this.barMouseDown },
             react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "ColorSlider__thumb", onMouseDown: this.dragStart, style: {
                     left: `${100 * _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__["default"].clamp(value, 0, 255) / 255}%`,
-                    backgroundColor: _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__["default"].getCSSColor(color),
-                } })));
+                } },
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "ColorSlider__thumb__color", style: {
+                        backgroundColor: _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__["default"].getCSSColor(color),
+                    } }))));
     }
     componentWillUnmount() {
         this.removeragListeners();

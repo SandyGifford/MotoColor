@@ -7,32 +7,35 @@
 	height: $barHeight;
 	margin: 2.5 * $borderThumbSize (1.5 * $borderThumbSize + $barHeight / 2);
 
-	border-radius: $barHeight / 4;
+	border-radius: $barHeight / 2;
 	box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);
 	cursor: pointer;
+	border: 0.1em inset;
 
 	&__thumb {
 		position: absolute;
-		top: 0;
+		top: 50%;
 		left: 0;
-		height: $barHeight;
-		width: $barHeight;
-		margin-left: -$barHeight / 2;
+		height: 1.5 * $barHeight;
+		width: 1.5 * $barHeight;
+		transform: translate(-50%, -50%);
+		box-shadow: 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);
+		background-color: #EEE;
+		border: 0.05em outset;
 
-		box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);
+		border-radius: 50%;
 
 		cursor: pointer;
 
-		&::after {
-			content: "";
+		&__color {
 			position: absolute;
-			width: 100%;
-			height: 100%;
-			border: solid $borderThumbSize #111;
-			box-shadow: 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);
-			top: -$borderThumbSize;
-			left: -$borderThumbSize;
-			border-radius: $borderThumbSize;
+			height: $barHeight;
+			width: $barHeight;
+			box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			border-radius: 50%;
 		}
 	}
 }
