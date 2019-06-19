@@ -25621,7 +25621,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                 .filter(item => !!item)
                 .forEach(item => {
                 const [name, color] = item.split("=");
-                const [h, s, l] = color.split(",");
+                const [h, s, l] = decodeURIComponent(color).split(",");
                 this.adjustmentChanged(name, {
                     h: parseInt(h),
                     s: parseInt(s),

@@ -85,7 +85,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 					.filter(item => !!item)
 					.forEach(item => {
 						const [name, color] = item.split("=");
-						const [h, s, l] = color.split(",");
+						const [h, s, l] = decodeURIComponent(color).split(",");
 
 						this.adjustmentChanged(name, {
 							h: parseInt(h),
