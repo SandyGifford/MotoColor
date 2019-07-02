@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/workers/imageAdjuster.worker.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/prod/workers/imageAdjuster.worker.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/utils/ColorUtils.ts":
-/*!*********************************!*\
-  !*** ./src/utils/ColorUtils.ts ***!
-  \*********************************/
+/***/ "./src/prod/utils/ColorUtils.ts":
+/*!**************************************!*\
+  !*** ./src/prod/utils/ColorUtils.ts ***!
+  \**************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -186,17 +186,17 @@ class ColorUtils {
 
 /***/ }),
 
-/***/ "./src/utils/ImageUtils.ts":
-/*!*********************************!*\
-  !*** ./src/utils/ImageUtils.ts ***!
-  \*********************************/
+/***/ "./src/prod/utils/ImageUtils.ts":
+/*!**************************************!*\
+  !*** ./src/prod/utils/ImageUtils.ts ***!
+  \**************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ImageUtils; });
-/* harmony import */ var _ColorUtils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ColorUtils */ "./src/utils/ColorUtils.ts");
+/* harmony import */ var _ColorUtils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ColorUtils */ "./src/prod/utils/ColorUtils.ts");
 
 class ImageUtils {
     static forEachPixel(pixels, act) {
@@ -271,10 +271,10 @@ class ImageUtils {
 
 /***/ }),
 
-/***/ "./src/utils/NumberUtils.ts":
-/*!**********************************!*\
-  !*** ./src/utils/NumberUtils.ts ***!
-  \**********************************/
+/***/ "./src/prod/utils/NumberUtils.ts":
+/*!***************************************!*\
+  !*** ./src/prod/utils/NumberUtils.ts ***!
+  \***************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -290,17 +290,17 @@ class NumberUtils {
 
 /***/ }),
 
-/***/ "./src/workers/imageAdjuster.worker.ts":
-/*!*********************************************!*\
-  !*** ./src/workers/imageAdjuster.worker.ts ***!
-  \*********************************************/
+/***/ "./src/prod/workers/imageAdjuster.worker.ts":
+/*!**************************************************!*\
+  !*** ./src/prod/workers/imageAdjuster.worker.ts ***!
+  \**************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @utils/NumberUtils */ "./src/utils/NumberUtils.ts");
-/* harmony import */ var _utils_ImageUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @utils/ImageUtils */ "./src/utils/ImageUtils.ts");
+/* harmony import */ var _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @utils/NumberUtils */ "./src/prod/utils/NumberUtils.ts");
+/* harmony import */ var _utils_ImageUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @utils/ImageUtils */ "./src/prod/utils/ImageUtils.ts");
 
 
 let basePixels;

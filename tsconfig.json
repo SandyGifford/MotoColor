@@ -12,16 +12,19 @@
 		"sourceMap": true,
 		"paths": {
 			"@workers/*": [
-				"./src/workers/*"
+				"./src/prod/workers/*"
 			],
 			"@typings/*": [
-				"./src/typings/*"
+				"./src/prod/typings/*"
 			],
 			"@utils/*": [
-				"./src/utils/*"
+				"./src/prod/utils/*"
 			],
 			"@components/*": [
-				"./src/components/*"
+				"./src/prod/components/*"
+			],
+			"@prod/*": [
+				"./src/prod/*"
 			]
 		}
 	}

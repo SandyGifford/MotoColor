@@ -1,5 +1,4 @@
-
-console.clear();
+import "./index.style";
 
 import * as React from "react";
 import * as ReactDOM from "react-dom";

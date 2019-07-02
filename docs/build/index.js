@@ -81,19 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.tsx");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/prod/index.tsx");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/App/App.style.scss":
-/*!**************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/App/App.style.scss ***!
-  \**************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/App/App.style.scss":
+/*!*******************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/App/App.style.scss ***!
+  \*******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
 exports.push([module.i, ".App {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  font-family: sans-serif;\n  color: white;\n  display: flex;\n  user-select: none; }\n  .App__sidebar {\n    background: #DDDDDE;\n    flex: 0 0 auto;\n    overflow-y: auto;\n    border-right: 0.1em outset; }\n  .App__content {\n    position: relative;\n    width: 100%;\n    background: #333;\n    flex: 1 1 auto; }\n    .App__content__frame {\n      position: absolute;\n      top: 50%;\n      left: 1em;\n      right: 1em;\n      transform: translateY(-50%);\n      border: 2em solid black;\n      border-radius: 0.25em; }\n      .App__content__frame::after {\n        content: \"\";\n        position: absolute;\n        top: -0.5em;\n        left: -0.5em;\n        right: -0.5em;\n        bottom: -0.5em;\n        border: 0.5em solid white;\n        border-radius: 0.25em; }\n      .App__content__frame__layers {\n        width: 100%;\n        height: 0; }\n        .App__content__frame__layers__layer {\n          position: absolute;\n          top: 0;\n          left: 0;\n          right: 0;\n          bottom: 0; }\n          .App__content__frame__layers__layer__img {\n            position: absolute; }\n            .App__content__frame__layers__layer__img--static {\n              width: 100%;\n              height: auto; }\n", ""]);
 
@@ -101,14 +101,14 @@ exports.push([module.i, ".App {\n  position: fixed;\n  top: 0;\n  left: 0;\n  ri
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/Checkbox/Checkbox.style.scss":
-/*!************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/Checkbox/Checkbox.style.scss ***!
-  \************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/Checkbox/Checkbox.style.scss":
+/*!*****************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/Checkbox/Checkbox.style.scss ***!
+  \*****************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
 exports.push([module.i, "@charset \"UTF-8\";\n.Checkbox {\n  display: flex;\n  padding: 0.25em 0.5em; }\n  .Checkbox__input {\n    position: relative;\n    height: 1.3em;\n    width: 1.3em;\n    flex: 0 0 auto;\n    visibility: hidden;\n    cursor: pointer; }\n    .Checkbox__input::before {\n      content: \"\";\n      position: absolute;\n      visibility: visible;\n      top: 0;\n      left: 0;\n      right: 0;\n      bottom: 0;\n      background: #666;\n      border-radius: 0.25em; }\n    .Checkbox__input:checked::after {\n      content: \"✔\";\n      color: white;\n      position: absolute;\n      visibility: visible;\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%); }\n  .Checkbox__label {\n    flex: 1 1 auto;\n    color: #666;\n    padding-left: 1em;\n    font-weight: bold;\n    cursor: pointer;\n    text-shadow: -0.05em -0.05em 0.1em #666, 0.05em 0.05em 0.1em white; }\n", ""]);
 
@@ -116,14 +116,14 @@ exports.push([module.i, "@charset \"UTF-8\";\n.Checkbox {\n  display: flex;\n  p
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/ColorSlider/ColorSlider.style.scss":
-/*!******************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/ColorSlider/ColorSlider.style.scss ***!
-  \******************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/ColorSlider/ColorSlider.style.scss":
+/*!***********************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/ColorSlider/ColorSlider.style.scss ***!
+  \***********************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
 exports.push([module.i, ".ColorSlider {\n  position: relative;\n  min-width: 10em;\n  height: 1em;\n  margin: 1.25em 1.25em;\n  border-radius: 0.5em;\n  box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n  cursor: pointer;\n  border: 0.1em inset; }\n  .ColorSlider__thumb {\n    position: absolute;\n    top: 50%;\n    left: 0;\n    height: 1.5em;\n    width: 1.5em;\n    transform: translate(-50%, -50%);\n    box-shadow: 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n    background-color: #EEE;\n    border: 0.05em outset;\n    border-radius: 50%;\n    cursor: pointer; }\n    .ColorSlider__thumb__color {\n      position: absolute;\n      height: 1em;\n      width: 1em;\n      box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%);\n      border-radius: 50%; }\n", ""]);
 
@@ -131,14 +131,14 @@ exports.push([module.i, ".ColorSlider {\n  position: relative;\n  min-width: 10e
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/HSLColorPicker/HSLColorPicker.style.scss":
-/*!************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/HSLColorPicker/HSLColorPicker.style.scss ***!
-  \************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/HSLColorPicker/HSLColorPicker.style.scss":
+/*!*****************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/HSLColorPicker/HSLColorPicker.style.scss ***!
+  \*****************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
 exports.push([module.i, "", ""]);
 
@@ -146,16 +146,31 @@ exports.push([module.i, "", ""]);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/HSLImage/HSLImage.style.scss":
-/*!************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/HSLImage/HSLImage.style.scss ***!
-  \************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/HSLImage/HSLImage.style.scss":
+/*!*****************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/HSLImage/HSLImage.style.scss ***!
+  \*****************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
 exports.push([module.i, ".HSLImage {\n  width: 100%;\n  height: auto; }\n", ""]);
+
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/index.style.scss":
+/*!******************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/index.style.scss ***!
+  \******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+// Module
+exports.push([module.i, "html,\nbody {\n  margin: 0;\n  width: 100%;\n  height: 100%; }\n", ""]);
 
 
 
@@ -25483,15 +25498,15 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "./src/components/App/App.style.scss":
-/*!*******************************************!*\
-  !*** ./src/components/App/App.style.scss ***!
-  \*******************************************/
+/***/ "./src/prod/components/App/App.style.scss":
+/*!************************************************!*\
+  !*** ./src/prod/components/App/App.style.scss ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./App.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/App/App.style.scss");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/lib/loader.js!./App.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/App/App.style.scss");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -25505,7 +25520,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -25513,25 +25528,25 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./src/components/App/App.tsx":
-/*!************************************!*\
-  !*** ./src/components/App/App.tsx ***!
-  \************************************/
+/***/ "./src/prod/components/App/App.tsx":
+/*!*****************************************!*\
+  !*** ./src/prod/components/App/App.tsx ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return App; });
-/* harmony import */ var _App_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.style */ "./src/components/App/App.style.scss");
+/* harmony import */ var _App_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.style */ "./src/prod/components/App/App.style.scss");
 /* harmony import */ var _App_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_App_style__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_HSLColorPicker_HSLColorPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/HSLColorPicker/HSLColorPicker */ "./src/components/HSLColorPicker/HSLColorPicker.tsx");
-/* harmony import */ var _utils_ImageUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/ImageUtils */ "./src/utils/ImageUtils.ts");
-/* harmony import */ var _components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @components/HSLImage/HSLImage */ "./src/components/HSLImage/HSLImage.tsx");
-/* harmony import */ var _utils_GeneralUtils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @utils/GeneralUtils */ "./src/utils/GeneralUtils.ts");
-/* harmony import */ var _components_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @components/Checkbox/Checkbox */ "./src/components/Checkbox/Checkbox.tsx");
+/* harmony import */ var _components_HSLColorPicker_HSLColorPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/HSLColorPicker/HSLColorPicker */ "./src/prod/components/HSLColorPicker/HSLColorPicker.tsx");
+/* harmony import */ var _utils_ImageUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/ImageUtils */ "./src/prod/utils/ImageUtils.ts");
+/* harmony import */ var _components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @components/HSLImage/HSLImage */ "./src/prod/components/HSLImage/HSLImage.tsx");
+/* harmony import */ var _utils_GeneralUtils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @utils/GeneralUtils */ "./src/prod/utils/GeneralUtils.ts");
+/* harmony import */ var _components_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @components/Checkbox/Checkbox */ "./src/prod/components/Checkbox/Checkbox.tsx");
 
 
 
@@ -25683,15 +25698,15 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
 
 /***/ }),
 
-/***/ "./src/components/Checkbox/Checkbox.style.scss":
-/*!*****************************************************!*\
-  !*** ./src/components/Checkbox/Checkbox.style.scss ***!
-  \*****************************************************/
+/***/ "./src/prod/components/Checkbox/Checkbox.style.scss":
+/*!**********************************************************!*\
+  !*** ./src/prod/components/Checkbox/Checkbox.style.scss ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./Checkbox.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/Checkbox/Checkbox.style.scss");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/lib/loader.js!./Checkbox.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/Checkbox/Checkbox.style.scss");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -25705,7 +25720,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -25713,17 +25728,17 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./src/components/Checkbox/Checkbox.tsx":
-/*!**********************************************!*\
-  !*** ./src/components/Checkbox/Checkbox.tsx ***!
-  \**********************************************/
+/***/ "./src/prod/components/Checkbox/Checkbox.tsx":
+/*!***************************************************!*\
+  !*** ./src/prod/components/Checkbox/Checkbox.tsx ***!
+  \***************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Checkbox; });
-/* harmony import */ var _Checkbox_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Checkbox.style */ "./src/components/Checkbox/Checkbox.style.scss");
+/* harmony import */ var _Checkbox_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Checkbox.style */ "./src/prod/components/Checkbox/Checkbox.style.scss");
 /* harmony import */ var _Checkbox_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Checkbox_style__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
@@ -25750,15 +25765,15 @@ Checkbox.lastId = 0;
 
 /***/ }),
 
-/***/ "./src/components/ColorSlider/ColorSlider.style.scss":
-/*!***********************************************************!*\
-  !*** ./src/components/ColorSlider/ColorSlider.style.scss ***!
-  \***********************************************************/
+/***/ "./src/prod/components/ColorSlider/ColorSlider.style.scss":
+/*!****************************************************************!*\
+  !*** ./src/prod/components/ColorSlider/ColorSlider.style.scss ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./ColorSlider.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/ColorSlider/ColorSlider.style.scss");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/lib/loader.js!./ColorSlider.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/ColorSlider/ColorSlider.style.scss");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -25772,7 +25787,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -25780,22 +25795,22 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./src/components/ColorSlider/ColorSlider.tsx":
-/*!****************************************************!*\
-  !*** ./src/components/ColorSlider/ColorSlider.tsx ***!
-  \****************************************************/
+/***/ "./src/prod/components/ColorSlider/ColorSlider.tsx":
+/*!*********************************************************!*\
+  !*** ./src/prod/components/ColorSlider/ColorSlider.tsx ***!
+  \*********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ColorSlider; });
-/* harmony import */ var _ColorSlider_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ColorSlider.style */ "./src/components/ColorSlider/ColorSlider.style.scss");
+/* harmony import */ var _ColorSlider_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ColorSlider.style */ "./src/prod/components/ColorSlider/ColorSlider.style.scss");
 /* harmony import */ var _ColorSlider_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ColorSlider_style__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils/ColorUtils */ "./src/utils/ColorUtils.ts");
-/* harmony import */ var _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/NumberUtils */ "./src/utils/NumberUtils.ts");
+/* harmony import */ var _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils/ColorUtils */ "./src/prod/utils/ColorUtils.ts");
+/* harmony import */ var _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/NumberUtils */ "./src/prod/utils/NumberUtils.ts");
 
 
 
@@ -25865,15 +25880,15 @@ class ColorSlider extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
 
 /***/ }),
 
-/***/ "./src/components/HSLColorPicker/HSLColorPicker.style.scss":
-/*!*****************************************************************!*\
-  !*** ./src/components/HSLColorPicker/HSLColorPicker.style.scss ***!
-  \*****************************************************************/
+/***/ "./src/prod/components/HSLColorPicker/HSLColorPicker.style.scss":
+/*!**********************************************************************!*\
+  !*** ./src/prod/components/HSLColorPicker/HSLColorPicker.style.scss ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./HSLColorPicker.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/HSLColorPicker/HSLColorPicker.style.scss");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/lib/loader.js!./HSLColorPicker.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/HSLColorPicker/HSLColorPicker.style.scss");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -25887,7 +25902,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -25895,21 +25910,21 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./src/components/HSLColorPicker/HSLColorPicker.tsx":
-/*!**********************************************************!*\
-  !*** ./src/components/HSLColorPicker/HSLColorPicker.tsx ***!
-  \**********************************************************/
+/***/ "./src/prod/components/HSLColorPicker/HSLColorPicker.tsx":
+/*!***************************************************************!*\
+  !*** ./src/prod/components/HSLColorPicker/HSLColorPicker.tsx ***!
+  \***************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return HSLColorPicker; });
-/* harmony import */ var _HSLColorPicker_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HSLColorPicker.style */ "./src/components/HSLColorPicker/HSLColorPicker.style.scss");
+/* harmony import */ var _HSLColorPicker_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HSLColorPicker.style */ "./src/prod/components/HSLColorPicker/HSLColorPicker.style.scss");
 /* harmony import */ var _HSLColorPicker_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_HSLColorPicker_style__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_ColorSlider_ColorSlider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/ColorSlider/ColorSlider */ "./src/components/ColorSlider/ColorSlider.tsx");
+/* harmony import */ var _components_ColorSlider_ColorSlider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/ColorSlider/ColorSlider */ "./src/prod/components/ColorSlider/ColorSlider.tsx");
 
 
 
@@ -25955,15 +25970,15 @@ class HSLColorPicker extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"]
 
 /***/ }),
 
-/***/ "./src/components/HSLImage/HSLImage.style.scss":
-/*!*****************************************************!*\
-  !*** ./src/components/HSLImage/HSLImage.style.scss ***!
-  \*****************************************************/
+/***/ "./src/prod/components/HSLImage/HSLImage.style.scss":
+/*!**********************************************************!*\
+  !*** ./src/prod/components/HSLImage/HSLImage.style.scss ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./HSLImage.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/HSLImage/HSLImage.style.scss");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/lib/loader.js!./HSLImage.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/HSLImage/HSLImage.style.scss");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -25977,7 +25992,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -25985,23 +26000,23 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./src/components/HSLImage/HSLImage.tsx":
-/*!**********************************************!*\
-  !*** ./src/components/HSLImage/HSLImage.tsx ***!
-  \**********************************************/
+/***/ "./src/prod/components/HSLImage/HSLImage.tsx":
+/*!***************************************************!*\
+  !*** ./src/prod/components/HSLImage/HSLImage.tsx ***!
+  \***************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return HSLImage; });
-/* harmony import */ var _HSLImage_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HSLImage.style */ "./src/components/HSLImage/HSLImage.style.scss");
+/* harmony import */ var _HSLImage_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HSLImage.style */ "./src/prod/components/HSLImage/HSLImage.style.scss");
 /* harmony import */ var _HSLImage_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_HSLImage_style__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils/ColorUtils */ "./src/utils/ColorUtils.ts");
-/* harmony import */ var _workers_ImageAdjuster__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @workers/ImageAdjuster */ "./src/workers/ImageAdjuster.ts");
-/* harmony import */ var _utils_ImageUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/ImageUtils */ "./src/utils/ImageUtils.ts");
+/* harmony import */ var _utils_ColorUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils/ColorUtils */ "./src/prod/utils/ColorUtils.ts");
+/* harmony import */ var _workers_ImageAdjuster__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @workers/ImageAdjuster */ "./src/prod/workers/ImageAdjuster.ts");
+/* harmony import */ var _utils_ImageUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/ImageUtils */ "./src/prod/utils/ImageUtils.ts");
 
 
 
@@ -26076,35 +26091,67 @@ class HSLImage extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
 
 /***/ }),
 
-/***/ "./src/index.tsx":
-/*!***********************!*\
-  !*** ./src/index.tsx ***!
-  \***********************/
+/***/ "./src/prod/index.style.scss":
+/*!***********************************!*\
+  !*** ./src/prod/index.style.scss ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js!../../node_modules/sass-loader/lib/loader.js!./index.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/index.style.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/prod/index.tsx":
+/*!****************************!*\
+  !*** ./src/prod/index.tsx ***!
+  \****************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_App_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/App/App */ "./src/components/App/App.tsx");
-console.clear();
+/* harmony import */ var _index_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.style */ "./src/prod/index.style.scss");
+/* harmony import */ var _index_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_style__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_App_App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/App/App */ "./src/prod/components/App/App.tsx");
+
 
 
 
 const target = document.createElement("div");
 document.body.appendChild(target);
-react_dom__WEBPACK_IMPORTED_MODULE_1__["render"](react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_components_App_App__WEBPACK_IMPORTED_MODULE_2__["default"], null), target);
+react_dom__WEBPACK_IMPORTED_MODULE_2__["render"](react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_App_App__WEBPACK_IMPORTED_MODULE_3__["default"], null), target);
 
 
 /***/ }),
 
-/***/ "./src/utils/ColorUtils.ts":
-/*!*********************************!*\
-  !*** ./src/utils/ColorUtils.ts ***!
-  \*********************************/
+/***/ "./src/prod/utils/ColorUtils.ts":
+/*!**************************************!*\
+  !*** ./src/prod/utils/ColorUtils.ts ***!
+  \**************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -26201,10 +26248,10 @@ class ColorUtils {
 
 /***/ }),
 
-/***/ "./src/utils/GeneralUtils.ts":
-/*!***********************************!*\
-  !*** ./src/utils/GeneralUtils.ts ***!
-  \***********************************/
+/***/ "./src/prod/utils/GeneralUtils.ts":
+/*!****************************************!*\
+  !*** ./src/prod/utils/GeneralUtils.ts ***!
+  \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -26222,7 +26269,7 @@ class GeneralUtils {
                     res(func.apply(args));
                 };
                 clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
+                timeout = window.setTimeout(later, wait);
             });
         };
     }
@@ -26231,17 +26278,17 @@ class GeneralUtils {
 
 /***/ }),
 
-/***/ "./src/utils/ImageUtils.ts":
-/*!*********************************!*\
-  !*** ./src/utils/ImageUtils.ts ***!
-  \*********************************/
+/***/ "./src/prod/utils/ImageUtils.ts":
+/*!**************************************!*\
+  !*** ./src/prod/utils/ImageUtils.ts ***!
+  \**************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ImageUtils; });
-/* harmony import */ var _ColorUtils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ColorUtils */ "./src/utils/ColorUtils.ts");
+/* harmony import */ var _ColorUtils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ColorUtils */ "./src/prod/utils/ColorUtils.ts");
 
 class ImageUtils {
     static forEachPixel(pixels, act) {
@@ -26316,10 +26363,10 @@ class ImageUtils {
 
 /***/ }),
 
-/***/ "./src/utils/NumberUtils.ts":
-/*!**********************************!*\
-  !*** ./src/utils/NumberUtils.ts ***!
-  \**********************************/
+/***/ "./src/prod/utils/NumberUtils.ts":
+/*!***************************************!*\
+  !*** ./src/prod/utils/NumberUtils.ts ***!
+  \***************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -26335,10 +26382,10 @@ class NumberUtils {
 
 /***/ }),
 
-/***/ "./src/workers/ImageAdjuster.ts":
-/*!**************************************!*\
-  !*** ./src/workers/ImageAdjuster.ts ***!
-  \**************************************/
+/***/ "./src/prod/workers/ImageAdjuster.ts":
+/*!*******************************************!*\
+  !*** ./src/prod/workers/ImageAdjuster.ts ***!
+  \*******************************************/
 /*! exports provided: ImageAdjuster */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

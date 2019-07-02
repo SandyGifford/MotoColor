@@ -18,7 +18,7 @@ export default class GeneralUtils {
 				};
 
 				clearTimeout(timeout);
-				timeout = setTimeout(later, wait);
+				timeout = window.setTimeout(later, wait);
 			});
 		};
 	}
