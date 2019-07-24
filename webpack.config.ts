@@ -18,7 +18,7 @@ const config: Configuration = {
 	mode: "development",
 	entry: {
 		index: "./src/prod/index.tsx",
-		dev: "./src/dev/client/dev.ts",
+		dev: "./src/dev/client/dev.tsx",
 		...glob.sync("./src/**/*.worker.ts").reduce((obj, path) => {
 			const [, name] = path.match(/\.\/src\/.*\/(.*)\.worker\.ts/);
 			obj[`workers/${name}`] = path;
