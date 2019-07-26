@@ -285,6 +285,18 @@ class NumberUtils {
     static clamp(val, min, max) {
         return Math.max(min, Math.min(max, val));
     }
+    static reduce(...nums) {
+        const gcd = NumberUtils.greatestCommonDenominator(...nums);
+        return nums.map(num => num / gcd);
+    }
+    static greatestCommonDenominator(...nums) {
+        return nums.reduce((factor, num) => {
+            return NumberUtils._greatestCommonDenominator(factor, num);
+        }, -Infinity);
+    }
+    static _greatestCommonDenominator(a, b) {
+        return b ? NumberUtils._greatestCommonDenominator(b, a % b) : a;
+    }
 }
 
 

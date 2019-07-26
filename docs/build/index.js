@@ -95,8 +95,7 @@
 
 exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".App {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  font-family: sans-serif;\n  color: white;\n  display: flex;\n  user-select: none; }\n  .App__sidebar {\n    background: #DDDDDE;\n    flex: 0 0 auto;\n    overflow-y: auto;\n    border-right: 0.1em outset; }\n  .App__content {\n    position: relative;\n    width: 100%;\n    background: #333;\n    flex: 1 1 auto; }\n    .App__content__frame {\n      position: absolute;\n      top: 50%;\n      left: 1em;\n      right: 1em;\n      transform: translateY(-50%);\n      border: 2em solid black;\n      border-radius: 0.25em; }\n      .App__content__frame::after {\n        content: \"\";\n        position: absolute;\n        top: -0.5em;\n        left: -0.5em;\n        right: -0.5em;\n        bottom: -0.5em;\n        border: 0.5em solid white;\n        border-radius: 0.25em; }\n      .App__content__frame__layers {\n        width: 100%;\n        height: 0; }\n        .App__content__frame__layers__layer {\n          position: absolute;\n          top: 0;\n          left: 0;\n          right: 0;\n          bottom: 0; }\n          .App__content__frame__layers__layer__img {\n            position: absolute; }\n            .App__content__frame__layers__layer__img--static {\n              width: 100%;\n              height: auto; }\n", ""]);
-
+exports.push([module.i, ".App {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  font-family: sans-serif;\n  color: white;\n  display: flex;\n  user-select: none; }\n  .App__sidebar {\n    background: #DDDDDE;\n    flex: 0 0 auto;\n    overflow-y: auto;\n    border-right: 0.1em outset; }\n  .App__content {\n    position: relative;\n    width: 100%;\n    background: #333;\n    flex: 1 1 auto; }\n    .App__content__frame {\n      width: 100%;\n      height: auto;\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%);\n      border-radius: 0.25em; }\n      .App__content__frame--sizeByHeight {\n        height: 100%;\n        width: auto; }\n      .App__content__frame__sizer {\n        width: 100%;\n        height: auto;\n        display: block; }\n        .App__content__frame__sizer--sizeByHeight {\n          height: 100%;\n          width: auto; }\n      .App__content__frame__layers__layer {\n        position: absolute;\n        top: 0;\n        left: 0;\n        right: 0;\n        bottom: 0; }\n        .App__content__frame__layers__layer__img {\n          position: absolute; }\n          .App__content__frame__layers__layer__img--static {\n            width: 100%;\n            height: auto; }\n", ""]);
 
 
 /***/ }),
@@ -113,7 +112,6 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 exports.push([module.i, "@charset \"UTF-8\";\n.Checkbox {\n  display: flex;\n  padding: 0.25em 0.5em; }\n  .Checkbox__input {\n    position: relative;\n    height: 1.3em;\n    width: 1.3em;\n    flex: 0 0 auto;\n    visibility: hidden;\n    cursor: pointer; }\n    .Checkbox__input::before {\n      content: \"\";\n      position: absolute;\n      visibility: visible;\n      top: 0;\n      left: 0;\n      right: 0;\n      bottom: 0;\n      background: #666;\n      border-radius: 0.25em; }\n    .Checkbox__input:checked::after {\n      content: \"✔\";\n      color: white;\n      position: absolute;\n      visibility: visible;\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%); }\n  .Checkbox__label {\n    flex: 1 1 auto;\n    color: #666;\n    padding-left: 1em;\n    font-weight: bold;\n    cursor: pointer;\n    text-shadow: -0.05em -0.05em 0.1em #666, 0.05em 0.05em 0.1em white; }\n", ""]);
 
 
-
 /***/ }),
 
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/ColorSlider/ColorSlider.style.scss":
@@ -126,7 +124,6 @@ exports.push([module.i, "@charset \"UTF-8\";\n.Checkbox {\n  display: flex;\n  p
 exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
 exports.push([module.i, ".ColorSlider {\n  position: relative;\n  min-width: 10em;\n  height: 1em;\n  margin: 1.25em 1.25em;\n  border-radius: 0.5em;\n  box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n  cursor: pointer;\n  border: 0.1em inset; }\n  .ColorSlider__thumb {\n    position: absolute;\n    top: 50%;\n    left: 0;\n    height: 1.5em;\n    width: 1.5em;\n    transform: translate(-50%, -50%);\n    box-shadow: 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n    background-color: #EEE;\n    border: 0.05em outset;\n    border-radius: 50%;\n    cursor: pointer; }\n    .ColorSlider__thumb__color {\n      position: absolute;\n      height: 1em;\n      width: 1em;\n      box-shadow: inset 0.1em 0.1em 0.05em 0 rgba(0, 0, 0, 0.5);\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%);\n      border-radius: 50%; }\n", ""]);
-
 
 
 /***/ }),
@@ -143,7 +140,6 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 exports.push([module.i, "", ""]);
 
 
-
 /***/ }),
 
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/components/HSLImage/HSLImage.style.scss":
@@ -158,7 +154,6 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 exports.push([module.i, ".HSLImage {\n  width: 100%;\n  height: auto; }\n", ""]);
 
 
-
 /***/ }),
 
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/prod/index.style.scss":
@@ -171,7 +166,6 @@ exports.push([module.i, ".HSLImage {\n  width: 100%;\n  height: auto; }\n", ""])
 exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
 exports.push([module.i, "html,\nbody {\n  margin: 0;\n  width: 100%;\n  height: 100%; }\n", ""]);
-
 
 
 /***/ }),
@@ -191,6 +185,7 @@ exports.push([module.i, "html,\nbody {\n  margin: 0;\n  width: 100%;\n  height: 
   Author Tobias Koppers @sokra
 */
 // css base code, injected by the css-loader
+// eslint-disable-next-line func-names
 module.exports = function (useSourceMap) {
   var list = []; // return the list of modules as css string
 
@@ -199,22 +194,25 @@ module.exports = function (useSourceMap) {
       var content = cssWithMappingToString(item, useSourceMap);
 
       if (item[2]) {
-        return '@media ' + item[2] + '{' + content + '}';
-      } else {
-        return content;
+        return "@media ".concat(item[2], "{").concat(content, "}");
       }
+
+      return content;
     }).join('');
   }; // import a list of modules into the list
+  // eslint-disable-next-line func-names
 
 
   list.i = function (modules, mediaQuery) {
     if (typeof modules === 'string') {
+      // eslint-disable-next-line no-param-reassign
       modules = [[null, modules, '']];
     }
 
     var alreadyImportedModules = {};
 
     for (var i = 0; i < this.length; i++) {
+      // eslint-disable-next-line prefer-destructuring
       var id = this[i][0];
 
       if (id != null) {
@@ -222,8 +220,8 @@ module.exports = function (useSourceMap) {
       }
     }
 
-    for (i = 0; i < modules.length; i++) {
-      var item = modules[i]; // skip already imported module
+    for (var _i = 0; _i < modules.length; _i++) {
+      var item = modules[_i]; // skip already imported module
       // this implementation is not 100% perfect for weird media query combinations
       // when a module is imported multiple times with different media queries.
       // I hope this will never occur (Hey this way we have smaller bundles)
@@ -232,7 +230,7 @@ module.exports = function (useSourceMap) {
         if (mediaQuery && !item[2]) {
           item[2] = mediaQuery;
         } else if (mediaQuery) {
-          item[2] = '(' + item[2] + ') and (' + mediaQuery + ')';
+          item[2] = "(".concat(item[2], ") and (").concat(mediaQuery, ")");
         }
 
         list.push(item);
@@ -244,7 +242,8 @@ module.exports = function (useSourceMap) {
 };
 
 function cssWithMappingToString(item, useSourceMap) {
-  var content = item[1] || '';
+  var content = item[1] || ''; // eslint-disable-next-line prefer-destructuring
+
   var cssMapping = item[3];
 
   if (!cssMapping) {
@@ -254,7 +253,7 @@ function cssWithMappingToString(item, useSourceMap) {
   if (useSourceMap && typeof btoa === 'function') {
     var sourceMapping = toComment(cssMapping);
     var sourceURLs = cssMapping.sources.map(function (source) {
-      return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';
+      return "/*# sourceURL=".concat(cssMapping.sourceRoot).concat(source, " */");
     });
     return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
   }
@@ -266,8 +265,8 @@ function cssWithMappingToString(item, useSourceMap) {
 function toComment(sourceMap) {
   // eslint-disable-next-line no-undef
   var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-  var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-  return '/*# ' + data + ' */';
+  var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
+  return "/*# ".concat(data, " */");
 }
 
 /***/ }),
@@ -25547,6 +25546,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @components/HSLImage/HSLImage */ "./src/prod/components/HSLImage/HSLImage.tsx");
 /* harmony import */ var _utils_GeneralUtils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @utils/GeneralUtils */ "./src/prod/utils/GeneralUtils.ts");
 /* harmony import */ var _components_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @components/Checkbox/Checkbox */ "./src/prod/components/Checkbox/Checkbox.tsx");
+/* harmony import */ var _utils_UrlUtils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @utils/UrlUtils */ "./src/prod/utils/UrlUtils.ts");
+/* harmony import */ var _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @utils/NumberUtils */ "./src/prod/utils/NumberUtils.ts");
+/* harmony import */ var _utils_DomUtils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @utils/DomUtils */ "./src/prod/utils/DomUtils.ts");
 
 
 
@@ -25554,16 +25556,37 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const layerInitiators = Object.freeze([
-    // { name: "Test Pattern", url: "assets/images/test_pattern.png" },
-    { name: "Tank", url: "assets/images/tank.png", x: 0.20858135, y: 0.25 },
-    { name: "Frame", url: "assets/images/frame.png", x: 0.21825397, y: 0.38921958 },
-    { name: "Fender", url: "assets/images/fender.png", x: 0.15228175, y: 0.46164021 },
-    { name: "Background", url: "assets/images/background.png", static: true },
-]);
+
+
+
+const layerInitiators = Object.freeze({
+    dflt: [
+        { name: "Tank", url: "assets/images/moto/tank.png", x: 0.20858135, y: 0.25 },
+        { name: "Frame", url: "assets/images/moto/frame.png", x: 0.21825397, y: 0.38921958 },
+        { name: "Fender", url: "assets/images/moto/fender.png", x: 0.15228175, y: 0.46164021 },
+        { name: "Background", url: "assets/images/moto/background.png", static: true },
+    ],
+    test: [
+        { name: "Background", url: "assets/images/test/test_pattern.png" },
+    ],
+    rox: [
+        { name: "Hair", url: "assets/images/rox/hair.png", x: 0.12830558, y: 0.24312268 },
+        { name: "Background", url: "assets/images/rox/background.png", static: true },
+    ]
+});
 class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     constructor(props) {
         super(props);
+        this.frameRef = react__WEBPACK_IMPORTED_MODULE_1__["createRef"]();
+        this.updateSizeByDim = () => {
+            const { imgDims } = this.state;
+            const frameRect = this.frameRef.current.getBoundingClientRect();
+            const frameRatio = frameRect.height / frameRect.width;
+            const imgRatio = imgDims.y / imgDims.x;
+            this.setState({
+                sizeByHeight: frameRatio < imgRatio,
+            });
+        };
         this.changeActive = (name, active) => {
             let { layers } = this.state;
             this.setState({
@@ -25590,7 +25613,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
             });
         };
         this.updateUrl = _utils_GeneralUtils__WEBPACK_IMPORTED_MODULE_5__["default"].debounce(() => {
-            const { layers } = this.state;
+            const { layers, layersType } = this.state;
             const url = Object.keys(layers).map(name => {
                 const { adjustment, active } = layers[name];
                 const [h, s, l] = adjustment;
@@ -25598,6 +25621,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                     return null;
                 return `${encodeURIComponent(name)}=${Math.round(h)},${Math.round(s)},${Math.round(l)}`;
             })
+                .concat([layersType ? `type=${layersType}` : null])
                 .filter(i => !!i)
                 .join("&");
             window.history.replaceState({}, "", `?${url}`);
@@ -25605,12 +25629,17 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         this.state = {
             layers: {},
             ready: false,
-            fullWidth: 0,
-            fullHeight: 0,
+            imgDims: { x: 0, y: 0 },
+            layersType: null,
+            sizeByHeight: false,
         };
     }
     componentDidMount() {
-        Promise.all(layerInitiators.map(layerInitiator => _utils_ImageUtils__WEBPACK_IMPORTED_MODULE_3__["default"].loadImageIntoHSLPixelData(layerInitiator.url)
+        const qso = _utils_UrlUtils__WEBPACK_IMPORTED_MODULE_7__["default"].getQueryStringObject();
+        const layerType = qso.type || "dflt";
+        delete qso.type;
+        window.addEventListener("resize", this.updateSizeByDim);
+        Promise.all(layerInitiators[layerType].map(layerInitiator => _utils_ImageUtils__WEBPACK_IMPORTED_MODULE_3__["default"].loadImageIntoHSLPixelData(layerInitiator.url)
             .then(pixelData => {
             const { name, x, y } = layerInitiator;
             const { layers } = this.state;
@@ -25632,12 +25661,11 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         })))
             .then(() => {
             const backgroundLayer = this.state.layers["Background"];
-            location.search.slice(1).split("&")
-                .filter(item => !!item)
-                .forEach(item => {
-                const [name, color] = item.split("=");
+            Object.keys(qso)
+                .forEach(layerName => {
+                const color = qso[layerName];
                 const [h, s, l] = decodeURIComponent(color).split(",");
-                this.adjustmentChanged(name, {
+                this.adjustmentChanged(layerName, {
                     h: parseInt(h),
                     s: parseInt(s),
                     l: parseInt(l),
@@ -25646,9 +25674,9 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
             });
             this.setState({
                 ready: true,
-                fullWidth: backgroundLayer.width,
-                fullHeight: backgroundLayer.height,
-            });
+                imgDims: { x: backgroundLayer.width, y: backgroundLayer.height },
+                layersType: layerType,
+            }, this.updateSizeByDim);
         });
     }
     componentDidUpdate() {
@@ -25656,11 +25684,14 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
             this.updateUrl();
     }
     render() {
-        const { layers, ready, fullWidth, fullHeight } = this.state;
+        const { layers, ready, imgDims, layersType, sizeByHeight } = this.state;
         if (!ready)
             return null;
+        const [ratioX, ratioY] = _utils_NumberUtils__WEBPACK_IMPORTED_MODULE_8__["default"].reduce(imgDims.x, imgDims.y);
+        const frameClassName = _utils_DomUtils__WEBPACK_IMPORTED_MODULE_9__["default"].makeBEMClassName("App__content__frame", { sizeByHeight });
+        const frameSizerClassName = _utils_DomUtils__WEBPACK_IMPORTED_MODULE_9__["default"].makeBEMClassName("App__content__frame__sizer", { sizeByHeight });
         return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App" },
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebar" }, layerInitiators.map(layerInitiator => {
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebar" }, layerInitiators[layersType].map(layerInitiator => {
                 const { name } = layerInitiator;
                 const layer = layers[name];
                 if (layerInitiator.static)
@@ -25675,11 +25706,10 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                                 a: 255,
                             }, onChange: color => this.adjustmentChanged(name, color) })));
             })),
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__content" },
-                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__content__frame" },
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__content__frame__layers", style: {
-                            paddingBottom: `${100 * fullHeight / fullWidth}%`,
-                        } }, layerInitiators.map(layerInitiator => {
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__content", ref: this.frameRef },
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: frameClassName },
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("canvas", { className: frameSizerClassName, width: ratioX, height: ratioY }),
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__content__frame__layers" }, layerInitiators[layersType].map(layerInitiator => {
                         const { name, url } = layerInitiator;
                         const layer = layers[name];
                         return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: name, className: "App__content__frame__layers__layer" }, layerInitiator.static ?
@@ -25687,8 +25717,8 @@ class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                             react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__content__frame__layers__layer__img", style: {
                                     top: `${100 * layer.y}%`,
                                     left: `${100 * layer.x}%`,
-                                    width: `${100 * layer.width / fullWidth}%`,
-                                    height: `${100 * layer.height / fullHeight}%`,
+                                    width: `${100 * layer.width / imgDims.x}%`,
+                                    height: `${100 * layer.height / imgDims.y}%`,
                                 } },
                                 react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_HSLImage_HSLImage__WEBPACK_IMPORTED_MODULE_4__["default"], { pixels: layer.pixels, adjustment: layer.adjustment, adjust: layer.active, width: layer.width, height: layer.height })));
                     }).reverse())))));
@@ -26248,6 +26278,26 @@ class ColorUtils {
 
 /***/ }),
 
+/***/ "./src/prod/utils/DomUtils.ts":
+/*!************************************!*\
+  !*** ./src/prod/utils/DomUtils.ts ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DomUtils; });
+class DomUtils {
+    static makeBEMClassName(baseClass, modifiers) {
+        // not efficient, but I had fun writing it
+        return [baseClass].concat(Object.keys(modifiers).map(mod => modifiers[mod] ? `${baseClass}--${mod}` : null).filter(i => !!i)).join(" ");
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/prod/utils/GeneralUtils.ts":
 /*!****************************************!*\
   !*** ./src/prod/utils/GeneralUtils.ts ***!
@@ -26376,6 +26426,43 @@ __webpack_require__.r(__webpack_exports__);
 class NumberUtils {
     static clamp(val, min, max) {
         return Math.max(min, Math.min(max, val));
+    }
+    static reduce(...nums) {
+        const gcd = NumberUtils.greatestCommonDenominator(...nums);
+        return nums.map(num => num / gcd);
+    }
+    static greatestCommonDenominator(...nums) {
+        return nums.reduce((factor, num) => {
+            return NumberUtils._greatestCommonDenominator(factor, num);
+        }, -Infinity);
+    }
+    static _greatestCommonDenominator(a, b) {
+        return b ? NumberUtils._greatestCommonDenominator(b, a % b) : a;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/prod/utils/UrlUtils.ts":
+/*!************************************!*\
+  !*** ./src/prod/utils/UrlUtils.ts ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UrlUtils; });
+class UrlUtils {
+    static getQueryStringObject() {
+        return location.search.replace(/^\?/, "").split("&")
+            .filter(item => !!item)
+            .reduce((obj, kvp) => {
+            const [key, value] = kvp.split("=");
+            obj[key] = value;
+            return obj;
+        }, {});
     }
 }
 

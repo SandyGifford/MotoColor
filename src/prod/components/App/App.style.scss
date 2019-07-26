@@ -27,29 +27,29 @@
 		flex: 1 1 auto;
 
 		&__frame {
+			@mixin sizeByDim {
+				width: 100%;
+				height: auto;
+
+				&--sizeByHeight {
+					height: 100%;
+					width: auto;
+				}
+			}
+
+			@include sizeByDim();
 			position: absolute;
 			top: 50%;
-			left: 1em;
-			right: 1em;
-			transform: translateY(-50%);
-			border: 2em solid black;
+			left: 50%;
+			transform: translate(-50%, -50%);
 			border-radius: 0.25em;
 
-			&::after {
-				content: "";
-				position: absolute;
-				top: -0.5em;
-				left: -0.5em;
-				right: -0.5em;
-				bottom: -0.5em;
-				border: 0.5em solid white;
-				border-radius: 0.25em;
+			&__sizer {
+				@include sizeByDim();
+				display: block;
 			}
 
 			&__layers {
-				width: 100%;
-				height:  0;
-
 				&__layer {
 					position: absolute;
 					top: 0;

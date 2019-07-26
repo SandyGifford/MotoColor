@@ -7,6 +7,10 @@ import ImageUtils from "@utils/ImageUtils";
 import HSLImage from "@components/HSLImage/HSLImage";
 import GeneralUtils from "@utils/GeneralUtils";
 import Checkbox from "@components/Checkbox/Checkbox";
+import UrlUtils from "@utils/UrlUtils";
+import NumberUtils from "@utils/NumberUtils";
+import DomUtils from "@utils/DomUtils";
+import { Vector2 } from "@typings/vector";
 
 interface LayerInitiator {
 	url: string;
@@ -31,32 +35,50 @@ export interface AppProps { }
 export interface AppState {
 	layers: { [name: string]: HSLLayer };
 	ready: boolean;
-	fullWidth: number;
-	fullHeight: number;
+	imgDims: Vector2;
+	layersType: string;
+	sizeByHeight: boolean;
 }
 
-const layerInitiators: LayerInitiator[] = Object.freeze([
-	// { name: "Test Pattern", url: "assets/images/test_pattern.png" },
-	{ name: "Tank", url: "assets/images/tank.png", x: 0.20858135, y: 0.25 },
-	{ name: "Frame", url: "assets/images/frame.png", x: 0.21825397, y: 0.38921958 },
-	{ name: "Fender", url: "assets/images/fender.png", x: 0.15228175, y: 0.46164021 },
-	{ name: "Background", url: "assets/images/background.png", static: true },
-]) as LayerInitiator[];
+const layerInitiators: { [type: string]: LayerInitiator[] } & { dflt: LayerInitiator[] } = Object.freeze({
+	dflt: [
+		{ name: "Tank", url: "assets/images/moto/tank.png", x: 0.20858135, y: 0.25 },
+		{ name: "Frame", url: "assets/images/moto/frame.png", x: 0.21825397, y: 0.38921958 },
+		{ name: "Fender", url: "assets/images/moto/fender.png", x: 0.15228175, y: 0.46164021 },
+		{ name: "Background", url: "assets/images/moto/background.png", static: true },
+	],
+	test: [
+		{ name: "Background", url: "assets/images/test/test_pattern.png" },
+	],
+	rox: [
+		{ name: "Hair", url: "assets/images/rox/hair.png", x: 0.12830558, y: 0.24312268 },
+		{ name: "Background", url: "assets/images/rox/background.png", static: true },
+	]
+});
 
 export default class App extends React.PureComponent<AppProps, AppState> {
+	private frameRef = React.createRef<HTMLDivElement>();
+
 	constructor(props: AppProps) {
 		super(props);
 
 		this.state = {
 			layers: {},
 			ready: false,
-			fullWidth: 0,
-			fullHeight: 0,
+			imgDims: { x: 0, y: 0 },
+			layersType: null,
+			sizeByHeight: false,
 		};
 	}
 
 	public componentDidMount() {
-		Promise.all(layerInitiators.map(layerInitiator => ImageUtils.loadImageIntoHSLPixelData(layerInitiator.url)
+		const qso = UrlUtils.getQueryStringObject();
+		const layerType = qso.type || "dflt";
+		delete qso.type;
+
+		window.addEventListener("resize", this.updateSizeByDim);
+
+		Promise.all(layerInitiators[layerType].map(layerInitiator => ImageUtils.loadImageIntoHSLPixelData(layerInitiator.url)
 			.then(pixelData => {
 				const { name, x, y } = layerInitiator;
 				const { layers } = this.state;
@@ -81,13 +103,12 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 			.then(() => {
 				const backgroundLayer = this.state.layers["Background"];
 
-				location.search.slice(1).split("&")
-					.filter(item => !!item)
-					.forEach(item => {
-						const [name, color] = item.split("=");
+				Object.keys(qso)
+					.forEach(layerName => {
+						const color = qso[layerName];
 						const [h, s, l] = decodeURIComponent(color).split(",");
 
-						this.adjustmentChanged(name, {
+						this.adjustmentChanged(layerName, {
 							h: parseInt(h),
 							s: parseInt(s),
 							l: parseInt(l),
@@ -97,9 +118,9 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 
 				this.setState({
 					ready: true,
-					fullWidth: backgroundLayer.width,
-					fullHeight: backgroundLayer.height,
-				});
+					imgDims: { x: backgroundLayer.width, y: backgroundLayer.height },
+					layersType: layerType,
+				}, this.updateSizeByDim);
 			});
 	}
 
@@ -108,15 +129,19 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 	}
 
 	public render(): React.ReactNode {
-		const { layers, ready, fullWidth, fullHeight } = this.state;
+		const { layers, ready, imgDims, layersType, sizeByHeight } = this.state;
 
 		if (!ready) return null;
+
+		const [ratioX, ratioY] = NumberUtils.reduce(imgDims.x, imgDims.y);
+		const frameClassName = DomUtils.makeBEMClassName("App__content__frame", { sizeByHeight });
+		const frameSizerClassName = DomUtils.makeBEMClassName("App__content__frame__sizer", { sizeByHeight });
 
 		return (
 			<div className="App">
 				<div className="App__sidebar">
 					{
-						layerInitiators.map(layerInitiator => {
+						layerInitiators[layersType].map(layerInitiator => {
 							const { name } = layerInitiator;
 							const layer = layers[name];
 
@@ -141,14 +166,12 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 						})
 					}
 				</div>
-				<div className="App__content">
-					<div className="App__content__frame">
-						<div className="App__content__frame__layers"
-							style={{
-								paddingBottom: `${100 * fullHeight / fullWidth}%`,
-							}}>
+				<div className="App__content" ref={this.frameRef}>
+					<div className={frameClassName}>
+						<canvas className={frameSizerClassName} width={ratioX} height={ratioY} />
+						<div className="App__content__frame__layers">
 							{
-								layerInitiators.map(layerInitiator => {
+								layerInitiators[layersType].map(layerInitiator => {
 									const { name, url } = layerInitiator;
 									const layer = layers[name];
 
@@ -163,8 +186,8 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 													style={{
 														top: `${100 * layer.y}%`,
 														left: `${100 * layer.x}%`,
-														width: `${100 * layer.width / fullWidth}%`,
-														height: `${100 * layer.height / fullHeight}%`,
+														width: `${100 * layer.width / imgDims.x}%`,
+														height: `${100 * layer.height / imgDims.y}%`,
 													}}>
 													<HSLImage
 														pixels={layer.pixels}
@@ -182,6 +205,17 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 				</div>
 			</div>
 		)
+	}
+
+	private updateSizeByDim = () => {
+		const { imgDims } = this.state;
+		const frameRect = this.frameRef.current.getBoundingClientRect();
+		const frameRatio = frameRect.height / frameRect.width;
+		const imgRatio = imgDims.y / imgDims.x;
+
+		this.setState({
+			sizeByHeight: frameRatio < imgRatio,
+		});
 	}
 
 	private changeActive = (name: string, active: boolean) => {
@@ -214,7 +248,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 	};
 
 	private updateUrl = GeneralUtils.debounce(() => {
-		const { layers } = this.state;
+		const { layers, layersType } = this.state;
 
 		const url = Object.keys(layers).map(name => {
 			const { adjustment, active } = layers[name];
@@ -223,6 +257,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 			if (!active) return null;
 			return `${encodeURIComponent(name)}=${Math.round(h)},${Math.round(s)},${Math.round(l)}`;
 		})
+			.concat([layersType ? `type=${layersType}` : null])
 			.filter(i => !!i)
 			.join("&");
 
