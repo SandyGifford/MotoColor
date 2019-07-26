@@ -25570,7 +25570,7 @@ const layerInitiators = Object.freeze({
         { name: "Background", url: "assets/images/test/test_pattern.png" },
     ],
     rox: [
-        { name: "Hair", url: "assets/images/rox/hair.png", x: 0.125, y: 0.155 },
+        { name: "Hair", url: "assets/images/rox/hair.png", x: 131 / 1152, y: 327 / 2048 },
         { name: "Background", url: "assets/images/rox/background.png", static: true },
     ]
 });
