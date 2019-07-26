@@ -51,7 +51,7 @@ const layerInitiators: { [type: string]: LayerInitiator[] } & { dflt: LayerIniti
 		{ name: "Background", url: "assets/images/test/test_pattern.png" },
 	],
 	rox: [
-		{ name: "Hair", url: "assets/images/rox/hair.png", x: 0.12830558, y: 0.24312268 },
+		{ name: "Hair", url: "assets/images/rox/hair.png", x: 0.125, y: 0.155 },
 		{ name: "Background", url: "assets/images/rox/background.png", static: true },
 	]
 });
